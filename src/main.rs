@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io::{BufReader, Read};
+use std::vec;
 use libm::exp;
+use crossbeam::channel::{self, Receiver, Sender};
 
 pub struct NeuralLayer{
     neurons: Vec<Neuron>
@@ -52,12 +54,33 @@ impl NeuralNetwork {
             v_reset, 
             model: Box::new(model), 
             input_reader: InputReader::empty_reader(), 
-            layers }
+            layers
+        }
     }
 
     pub fn run(&mut self, input_files: &[&str], output_file: &str) -> Result<File, std::io::Error>{
         self.input_reader = InputReader::from_files(input_files);
         File::create(output_file)
+    }
+
+    pub fn connect(&mut self, l1: i8, l2: i8, weights: Vec<Vec<i32>>){
+         return;
+    }
+
+    pub fn connect_inputs(&mut self, filenames: &[&str], weights: Vec<i32>){
+        if self.layers.len() == 0 {
+            panic!("Cannot link input with first layer, if the layer does not exist.")
+        }
+        for filename in filenames{
+            let v = InputReader::read_file(filename);
+            match v {
+                Ok(content) => self.input_reader.inputs.push(content),
+                Err(e) => panic!("Error: {:?}", e) 
+            }
+        }
+
+        
+
     }
 
 }
@@ -73,6 +96,15 @@ pub struct Neuron {
     v_mem_old : f32,
     // last unit time at which the neuron fired
     ts_1 : i8,
+    // channels' ends
+    synapses: Vec<Receiver<i8>>,
+    // inhibitory channels
+    inib_channels: Vec<Receiver<i8>>,
+    // neuron output
+    output: Option<Sender<i32>>,
+    // income synapses weight from the exitatory layer
+    exitatory_weights: Vec<i32>,
+    inhibitory_weights: Vec<i32>
 }
 
 impl Neuron {
@@ -83,7 +115,12 @@ impl Neuron {
             v_reset, 
             v_mem_old: v_rest,
             ts_1: 0, 
-            model: Box::new(model) 
+            model: Box::new(model),
+            synapses: vec![],
+            inib_channels: vec![],
+            output: Option::None,
+            exitatory_weights: vec![],
+            inhibitory_weights: vec![], 
         }
     }
 
@@ -92,12 +129,17 @@ impl Neuron {
 
 
 pub struct InputReader {
-    inputs : Vec<Vec<i8>>
+    // [ [ 00001101001 ], [010001001]]
+    inputs : Vec<Vec<i8>>,
+    out: Option<Sender<Vec<i8>>>,
 }
 
 impl InputReader {
     pub fn empty_reader() -> Self {
-        Self { inputs: vec![] }
+        Self { 
+            inputs: vec![],
+            out: Option::None,
+        }
     }
     pub fn read_file(filename: &str) -> Result<Vec<i8>, std::io::Error>{
         let file = File::open(filename)?;
@@ -124,7 +166,7 @@ impl InputReader {
             }
         }
 
-        Self { inputs }
+        Self { inputs, out: Option::None }
     }
     pub fn print(&self){
         for i in &self.inputs{
