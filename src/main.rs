@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{BufReader, Read};
 use std::vec;
 use libm::exp;
-use crossbeam::channel::{self, Receiver, Sender};
+use crossbeam::channel::{self, Receiver, Sender, unbounded};
 
 pub struct NeuralLayer{
     neurons: Vec<Neuron>
@@ -21,13 +21,16 @@ impl NeuralLayer {
         self.neurons.push(neuron);
     }
 }
+
+
+
 pub struct NeuralNetwork{
     // neural network parameters
     v_threshold : f32,
     v_rest : f32, 
     v_reset : f32,
     // LIR model function signature, maybe to be generalized
-    model : Box<dyn Fn( i8, i8, f32, f32, f32, Vec<i8>) -> f32>,
+    model : Box<dyn Fn( i8, i8, f32, f32, f64, Vec<i8>) -> f32>,
 
     input_reader : InputReader,
 
@@ -37,7 +40,7 @@ pub struct NeuralNetwork{
 }
 
 impl NeuralNetwork {
-    pub fn new(v_threshold : f32, v_rest : f32, v_reset : f32, model : fn( i8, i8, f32, f32, f32, Vec<i8>) -> f32, npl : &[i8]) -> Self{
+    pub fn new(v_threshold : f32, v_rest : f32, v_reset : f32, model : fn( i8, i8, f32, f32, f64, Vec<i8>) -> f32, npl : &[i8]) -> Self{
         let mut layers = vec![];
         
         for n_neurons in npl {
@@ -67,7 +70,7 @@ impl NeuralNetwork {
          return;
     }
 
-    pub fn connect_inputs(&mut self, filenames: &[&str], weights: Vec<i32>){
+    pub fn connect_inputs(&mut self, filenames: &[&str], weights: Vec<Vec<i32>>){
         if self.layers.len() == 0 {
             panic!("Cannot link input with first layer, if the layer does not exist.")
         }
@@ -78,8 +81,14 @@ impl NeuralNetwork {
                 Err(e) => panic!("Error: {:?}", e) 
             }
         }
-
-        
+        let (tx, rx) = unbounded::<Vec<i8>>();
+        self.input_reader.out = Option::Some(tx);
+        for i in 0..filenames.len() {
+            for neuron in &mut self.layers[0].neurons{
+                neuron.exitatory_weights = weights[i].clone();
+                neuron.synapses.push(rx.clone());
+            }
+        }
 
     }
 
@@ -91,13 +100,13 @@ pub struct Neuron {
     v_rest : f32, 
     v_reset : f32,
     // LIR model function signature, maybe to be generalized
-    model : Box<dyn Fn( i8, i8, f32, f32, f32, Vec<i8>) -> f32>,
+    model : Box<dyn Fn( i8, i8, f32, f32, f64, Vec<i8>) -> f32>,
     // last 'neuron fired' tension 
     v_mem_old : f32,
     // last unit time at which the neuron fired
     ts_1 : i8,
     // channels' ends
-    synapses: Vec<Receiver<i8>>,
+    synapses: Vec<Receiver<Vec<i8>>>,
     // inhibitory channels
     inib_channels: Vec<Receiver<i8>>,
     // neuron output
@@ -108,7 +117,7 @@ pub struct Neuron {
 }
 
 impl Neuron {
-    fn new(v_threshold : f32, v_rest : f32, v_reset : f32, model: fn( i8, i8, f32, f32, f32, Vec<i8>) -> f32) -> Self{
+    fn new(v_threshold : f32, v_rest : f32, v_reset : f32, model: fn( i8, i8, f32, f32, f64, Vec<i8>) -> f32) -> Self{
         Self { 
             v_threshold, 
             v_rest, 
@@ -175,22 +184,35 @@ impl InputReader {
     }
 }
 
-fn main() {
+fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<i8>) -> f32{
+    let k = - (ts - ts_1) as f64 / tao;
     
-    let model = |ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<i8>| -> f32{
-        let k = - (ts - ts_1) as f64 / tao;
-        
-        let exponential = exp(k) as f32;
+    let exponential = exp(k) as f32;
 
-        let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
+    let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
 
-        let weight = weights.iter().fold(0, |sum, x| sum + x) as f32;
-        return v_mem + weight; 
-          
-    };
+    let weight = weights.iter().fold(0, |sum, x| sum + x) as f32;
+    return v_mem + weight; 
+      
+}
+fn main() {
+    let v_threshold = 1.0;
+    let v_rest = 0.6;
+    let v_reset = 0.4;
+
+
+
+    
     let files = [".\\data\\input1.txt", ".\\data\\input2.txt", ".\\data\\input3.txt"];
     let ir = InputReader::from_files(&files );
     println!("--- testing input --- ");
-    ir.print()
+    ir.print();
+
+    let mut nn = NeuralNetwork::new(v_threshold, v_rest, v_reset, lif, &[1]);
+    let input_w = vec![vec![10, 20, 30]];
+    nn.connect_inputs(&files, input_w);
+
+    // TODO: scrivere il neruone come thread e farlo comunicare con gli input reader, temporizzare l'emissione di un
+    // input con l'output 
     
 }
