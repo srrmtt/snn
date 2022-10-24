@@ -1,4 +1,6 @@
-use crossbeam::channel::unbounded;
+use std::vec;
+
+use crossbeam::channel::{bounded};
 
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron};
 
@@ -46,8 +48,17 @@ impl NeuralNetwork {
 
     pub fn run(self, output_file: &str) {
         let tid_input = self.input_reader.emit_spikes();
-
+        let mut v = vec![];
+        for l in self.layers {
+            v.push(l.run_neurons());
+        }
+        
         tid_input.join();
+        for tids in v {
+            for tid in tids {
+                tid.join();
+            }
+        }
         println!("printing the results in {}", output_file);
     }
 
@@ -66,7 +77,7 @@ impl NeuralNetwork {
                 Err(e) => panic!("Error: {:?}", e),
             }
         }
-        let (tx, rx) = unbounded::<Vec<i8>>();
+        let (tx, rx) = bounded::<Vec<i8>>(0);
         self.input_reader.out = Option::Some(tx);
         let mut i = 0;
         for neuron in &mut self.layers[0].neurons {

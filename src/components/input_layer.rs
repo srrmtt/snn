@@ -82,8 +82,8 @@ impl InputLayer {
                 println!("sending... {:?}", &spikes);
                 let result = sender.send(spikes);
                 match result {
-                    Ok(()) => println!("--------"),
                     Err(e) => println!("{:?}", e),
+                    _ => (),
                 }
             }
             return 1;

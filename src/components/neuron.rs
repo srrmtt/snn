@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use crossbeam::channel::{Receiver, Sender};
 
 pub struct Neuron {
@@ -6,7 +8,7 @@ pub struct Neuron {
     v_rest: f32,
     v_reset: f32,
     // LIR model function signature, maybe to be generalized
-    model: Box<dyn Fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32>,
+    model: Arc<dyn Fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32 + Send + Sync + 'static>,
     // last 'neuron fired' tension
     v_mem_old: f32,
     // last unit time at which the neuron fired
@@ -41,7 +43,7 @@ impl Neuron {
             ts_1: 0,
             ts: 0,
             tao,
-            model: Box::new(model),
+            model: Arc::new(model),
             synapses: None,
             inib_channels: vec![],
             output: Option::None,
@@ -53,7 +55,9 @@ impl Neuron {
     pub fn start(&self) {
         let mut spike = false;
         loop {
+            spike = false;
             match &self.synapses {
+                
                 Some(rx) => {
                     let message = rx.recv();
                     match message {
@@ -66,7 +70,7 @@ impl Neuron {
                                 weighted_inputs.push(*input as i32 * self.exitatory_weights[i]);
                             }
                             if spike {
-                                let out = (self.model)(
+                                let out = (*self.model)(
                                     self.ts,
                                     self.ts_1,
                                     self.v_rest,
@@ -74,15 +78,17 @@ impl Neuron {
                                     self.tao,
                                     weighted_inputs,
                                 );
-                                print!("{:?}", out);
+                                println!("out: {:?} for {:?}", out, inputs);
                             }
                         }
                         Err(e) => {
-                            panic!("{:?}", e);
+                            return;
                         }
                     }
                 }
-                None => {}
+                None => {
+                    panic!("neuron not connected to a channel");
+                }
             }
         }
     }
