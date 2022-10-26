@@ -1,94 +1,63 @@
-use std::{
-    fs::File,
-    io::{BufReader, Read},
-    thread::{self, JoinHandle},
-};
+use std::thread::{self, JoinHandle};
 
 use crossbeam::channel::Sender;
 
+use super::input::Input;
+
 pub struct InputLayer {
     // [ [ 00001101001 ], [010001001]]
-    pub inputs: Vec<Vec<i8>>,
-    pub out: Option<Sender<Vec<i8>>>,
+    pub inputs: Vec<Input>,
 }
 
 impl InputLayer {
-    pub fn empty_reader() -> Self {
-        Self {
-            inputs: vec![],
-            out: Option::None,
+    pub fn new() -> Self {
+        Self { inputs: vec![] }
+    }
+    fn check_inputs(&self) {
+        if self.inputs.is_empty() {
+            panic!("Input layer is empty, please specify at least a file.");
+        }
+        for input in &self.inputs {
+            if input.is_empty_sender() {
+                panic!("Call the connect_inputs method of the neural network class before running the simulation.")
+            }
         }
     }
-    pub fn read_file(filename: &str) -> Result<Vec<i8>, std::io::Error> {
-        let file = File::open(filename)?;
-        let mut buf_reader = BufReader::new(file);
-        let mut content = String::new();
 
-        buf_reader.read_to_string(&mut content)?;
-
-        let ret = content
-            .bytes()
-            .into_iter()
-            .map(|c| (c - '0' as u8) as i8)
-            .collect();
-
-        Ok(ret)
-    }
     pub fn from_files(filenames: &[&str]) -> Self {
-        let mut inputs: Vec<Vec<i8>> = vec![];
-        for f in filenames {
-            match InputLayer::read_file(f) {
-                Err(e) => {
-                    panic!("Unable to read file: {}.", e);
-                }
-                Ok(v) => {
-                    inputs.push(v);
-                }
+        let mut inputs = vec![];
+
+        for filename in filenames {
+            let r = Input::from_file(*filename);
+            match r {
+                Ok(input) => inputs.push(input),
+                Err(e) => panic!("Error during reading: {}: {:?}", *filename, e),
             }
         }
 
-        Self {
-            inputs,
-            out: Option::None,
-        }
-    }
-    pub fn print(&self) {
-        for i in &self.inputs {
-            println!("{:?}", i);
-        }
+        Self { inputs }
     }
 
-    pub fn emit_spikes(mut self) -> JoinHandle<i8> {
-        let child = thread::spawn(move || {
-            let sender;
-            match &self.out {
-                Some(s) => {
-                    sender = s;
-                }
-                None => {
-                    println!("Input layer is not connect with the network, call the connect_inputs of NeuralNetwork class to correct this error.");
-                    return -1;
-                }
-            }
-            let mut end = false;
-            while !end {
-                let mut spikes = vec![];
-                for i in 0..self.inputs.len() {
-                    match self.inputs[i].pop() {
-                        Some(spike) => spikes.push(spike),
-                        None => end = true,
-                    }
-                }
-                println!("sending... {:?}", &spikes);
-                let result = sender.send(spikes);
-                match result {
-                    Err(e) => println!("{:?}", e),
-                    _ => (),
-                }
-            }
-            return 1;
-        });
+    pub fn add(&mut self, input: Input) {
+        self.inputs.push(input);
+    }
 
-        return child;
+    pub fn set_input_sender(&mut self, n_input: usize, tx: Sender<i8>) {
+        self.inputs[n_input].set_sender(tx);
+    }
+    pub fn emit_spikes(mut self) -> Vec<JoinHandle<()>> {
+        // vector of thread ids belonging to each spike generator
+        let mut tids = vec![];
+        // check the inputs status before proceding
+        self.check_inputs();
+
+        for input in self.inputs {
+            // spawn a thread for each input file
+            let child = thread::spawn(move || {
+                input.run();
+            });
+            tids.push(child);
+        }
+        return tids;
     }
 }

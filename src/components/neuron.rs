@@ -1,6 +1,8 @@
-use std::sync::Arc;
+use std::sync::{Arc, Barrier};
 
-use crossbeam::channel::{Receiver, Sender};
+use crossbeam::channel::{RecvError, Sender};
+
+use super::synapse::Synapse;
 
 pub struct Neuron {
     // neural network parameters
@@ -15,19 +17,15 @@ pub struct Neuron {
     ts_1: i8,
     ts: i8,
     // channels' ends
-    pub synapses: Option<Receiver<Vec<i8>>>,
-    // inhibitory channels
-    inib_channels: Vec<Receiver<i8>>,
+    pub synapses: Vec<Synapse>,
     // neuron output
-    output: Option<Sender<i32>>,
-    // income synapses weight from the exitatory layer
-    pub exitatory_weights: Vec<i32>,
-    inhibitory_weights: Vec<i32>,
+    pub output: Option<Sender<i8>>,
 
     tao: f64,
 }
 
 impl Neuron {
+    // Neuron constructor
     pub fn new(
         v_threshold: f32,
         v_rest: f32,
@@ -39,56 +37,58 @@ impl Neuron {
             v_threshold,
             v_rest,
             v_reset,
+            // at the beginning the net is resting
             v_mem_old: v_rest,
             ts_1: 0,
             ts: 0,
             tao,
             model: Arc::new(model),
-            synapses: None,
-            inib_channels: vec![],
+            synapses: vec![],
             output: Option::None,
-            exitatory_weights: vec![],
-            inhibitory_weights: vec![],
         }
     }
-
-    pub fn start(&self) {
-        let mut spike = false;
-        loop {
-            spike = false;
-            match &self.synapses {
-                
-                Some(rx) => {
-                    let message = rx.recv();
-                    match message {
-                        Ok(inputs) => {
-                            let mut weighted_inputs = vec![];
-                            for (i, input) in inputs.iter().enumerate() {
-                                if *input == 1 {
-                                    spike = true;
-                                }
-                                weighted_inputs.push(*input as i32 * self.exitatory_weights[i]);
-                            }
-                            if spike {
-                                let out = (*self.model)(
-                                    self.ts,
-                                    self.ts_1,
-                                    self.v_rest,
-                                    self.v_mem_old,
-                                    self.tao,
-                                    weighted_inputs,
-                                );
-                                println!("out: {:?} for {:?}", out, inputs);
-                            }
-                        }
-                        Err(e) => {
-                            return;
-                        }
+    fn read_spikes(&self) -> Result<Vec<i32>, RecvError> {
+        let mut weighted_inputs = vec![];
+        for syanpse in &self.synapses {
+            match syanpse.receive() {
+                Ok(wi) => {
+                    if wi != 0 {
+                        weighted_inputs.push(wi)
                     }
                 }
-                None => {
-                    panic!("neuron not connected to a channel");
+                Err(e) => return Err(e),
+            }
+        }
+        return Ok(weighted_inputs);
+    }
+    pub fn start(&mut self, barrier: Arc<Barrier>) {
+        loop {
+            self.ts += 1;
+            let res_weighted_inputs = self.read_spikes();
+
+            let spike_received = match &res_weighted_inputs {
+                Err(e) => break,
+                Ok(weighted_inputs) => weighted_inputs.iter().any(|&wi| wi != 0),
+            };
+            if spike_received {
+                let out = (*self.model)(
+                    self.ts,
+                    self.ts_1,
+                    self.v_rest,
+                    self.v_mem_old,
+                    self.tao,
+                    res_weighted_inputs.unwrap(),
+                );
+                let out_spike;
+                if out > self.v_threshold {
+                    out_spike = 1;
+                    self.ts_1 = self.ts;
+                    self.v_mem_old = self.v_reset;
+                } else {
+                    out_spike = 0;
                 }
+                println!("out: {}", out_spike);
+                barrier.wait();
             }
         }
     }

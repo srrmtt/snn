@@ -32,7 +32,6 @@ fn main() {
     ];
     let mut ir = InputLayer::from_files(&files);
     println!("--- testing input --- ");
-    ir.print();
 
     let mut nn = NeuralNetwork::new(v_threshold, v_rest, v_reset, tao, lif, &[1]);
     let input_w = vec![vec![10, 20, 30]];
