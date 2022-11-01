@@ -32,7 +32,7 @@ fn main() {
         //"./data/input3.txt",
     ];
 
-    let mut nn = NeuralNetwork::new(v_threshold, v_rest, v_reset, tao, lif, &[2,1]);
+    let mut nn = NeuralNetwork::new(v_threshold, v_rest, v_reset, tao, lif, &[2]);
     let input_w = vec![vec![10, 1], vec![5, 1]];
 
     
@@ -46,7 +46,8 @@ fn main() {
     println!("{}", &nn.to_string());
     println!("inputs: connected");
     let l1_internal_w = vec![vec![None, Some(-3)], vec![Some(-1), None]];
-    nn.connect(0, 1, vec![vec![Some(1)], vec![Some(2)]]);
+    // nn.connect(0, 1, vec![vec![Some(1)], vec![Some(2)]]);
+    nn.connect(0, 0, vec![vec![None, Some(-1)], vec![Some(-2), None]]);
     //println!("internal connection: done");
     nn.connect_output(om);
     nn.run();

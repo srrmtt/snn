@@ -4,13 +4,17 @@ use std::sync::mpsc::SyncSender;
 
 use super::input::Input;
 
+/*
+Conenitore di oggetti Input
+*/
 pub struct InputLayer {
-    // [ [ 00001101001 ], [010001001]]
+    // vettore di input
     pub inputs: Vec<Input>,
 }
 
 impl InputLayer {
     fn check_inputs(&self) {
+        // TODO return a result instead of panicing create an Error for the empty layer and for the non connected layers
         if self.inputs.is_empty() {
             panic!("Input layer is empty, please specify at least a file.");
         }
@@ -21,7 +25,10 @@ impl InputLayer {
         }
     }
 
+    //TODO change the return in a Result for handling the reading file error
     pub fn from_files(filenames: &[&str]) -> Self {
+        // create an Input layer from a file vector reference
+
         let mut inputs = vec![];
 
         for filename in filenames {
@@ -31,11 +38,13 @@ impl InputLayer {
                 Err(e) => panic!("Error during reading: {}: {:?}", *filename, e),
             }
         }
-
+        // TODO check the length of each input, if the lengths differ return an error
         Self { inputs }
     }
 
     pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<i8>) {
+        // add a sender to the n_input-th input object 
+        // TODO return a result<Ok<()>,Error> for out of bounds error  
         println!("adding sender to input [{}]", &n_input);
         self.inputs[n_input].add_sender(tx);
     }
@@ -43,7 +52,7 @@ impl InputLayer {
     pub fn emit_spikes(self) -> Vec<JoinHandle<()>> {
         // vector of thread ids belonging to each spike generator
         let mut tids = vec![];
-        // check the inputs status before proceding
+        // check the inputs status before proceding, modify for handling the result 
         self.check_inputs();
 
         for input in self.inputs {

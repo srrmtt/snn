@@ -4,6 +4,10 @@ use std::sync::mpsc::sync_channel;
 
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
 
+/*
+Classe contenitore dei vari layer, attraverso i vari metodi connect si possono aggiungere le varie componenti e collegarle tra loro.
+Attraverso il metodo run() si lancia la simulazione.
+*/
 pub struct NeuralNetwork {
     input_layer: Option<InputLayer>,
     neural_layers: Vec<NeuralLayer>,
@@ -12,10 +16,12 @@ pub struct NeuralNetwork {
 
 impl NeuralNetwork {
     pub fn new(
+        // costruttore
         v_threshold: f32,
         v_rest: f32,
         v_reset: f32,
         tao: f64,
+        // prendere spunto dal progetto degli altri, magari si può fare meglio
         model: fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32,
         npl: &[i8],
     ) -> Self {
@@ -44,15 +50,21 @@ impl NeuralNetwork {
     }
 
     pub fn run(self) {
+        // lancia la simulazione di tutta la rete neurale, wrapper di tutti i metodi di run 
+        
+        // avvia tutti gli input layer e colleziona gli handler per fare join in caso di successo, None altrimenti (cambiare Option in Result)
         let tid_input = match self.input_layer {
             None => panic!("Use connect inputs - Input layer not connected"),
             Some(il) => il.emit_spikes(),
         };
+        
+        // lancia il metodo che riceve le spike di output dell'ultimo layer, panic se non è connesso ( cambiare option in Result ) 
         let tid_output = match self.output_monitor {
             None => panic!("Use connect output - Output monitor not connected"),
             Some(om) => om.run(),
         };
         
+        // lancia tutti i neuroni di ogni layer, cambiare il metodo run neurons in modo che restituisca un Result<Error, Ok(Vec<Handle>)
         let mut v = vec![];
         for l in self.neural_layers {
             v.push(l.run_neurons());
@@ -61,7 +73,7 @@ impl NeuralNetwork {
 
         
         let mut i = 0;
-
+        // join dei vari thread
         for tid in tid_input {
             let r = tid.join();
             match r {
@@ -80,7 +92,7 @@ impl NeuralNetwork {
                 }
             }
         }
-
+        // TODO: handle join 
         tid_output.join();
     }
 
@@ -111,7 +123,7 @@ impl NeuralNetwork {
                 match *weight {
                     None => continue,
                     Some(w) => {
-                        println!("---[layer {}] connecting neuron {} with neuron {}",to, i, j);
+                        println!("---[layer {} - {}] connecting neuron {} with neuron {}",to, from, i, j);
                         self.neural_layers[to].add_synapse(j, w, rx);
                         // add the sender (tx) part of the channel to the 'to' layer
                         self.neural_layers[from].add_sender(i, tx);
@@ -144,16 +156,21 @@ impl NeuralNetwork {
         }
     }
 
+    // TODO: return un errore al posto del panic, OK(()) se tutto funziona 
     pub fn connect_output(&mut self, mut output_monitor: OutputMonitor){
+        // Connette l'ultimo layer con un output monitor, consuma l'ouput monitor e lo assegna alla rete. 
+        
+        // controllo che esista almeno un layer 
         if self.neural_layers.len() == 0{
             panic!("add at least a layer before adding the output monitor");
         }
+        // calcolo index ultimo layer
         let last_layer =  self.neural_layers.len() - 1 ;
-        
-        
 
+        
         for neuron in self.neural_layers[last_layer].neurons.iter_mut(){
-            let (tx, rx) = sync_channel::<i8>(0);
+            // assegna ad ogni neurone l'estremità di sender e aggiunge all'output monitor i receiver
+            let (tx, rx) = sync_channel::<i8>(0);    
             neuron.output.push(tx.clone());
             output_monitor.add_receiver(rx);
         }
