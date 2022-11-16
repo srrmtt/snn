@@ -5,7 +5,7 @@ use std::vec;
 
 use components::neural_network::NeuralNetwork;
 
-use crate::components::output::OutputMonitor;
+use crate::components::{output::OutputMonitor, input_layer::InputLayer};
 
 fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<i32>) -> f32 {
     let k = -(ts - ts_1) as f64 / tao;
@@ -53,4 +53,11 @@ fn main() {
     nn.run();
     // TODO: scrivere il neruone come thread e farlo comunicare con gli input reader, temporizzare l'emissione di un
     // input con l'output
+
+    println!("--- Test input layer from file ---");
+    let il_res = InputLayer::from_file("./data/inputSpikes.txt", '\n');
+    match il_res {
+        Ok(il) => println!("\t\t --- {}", il.to_string()),
+        Err(e) => println!("{:?}", e),
+    }
 }
