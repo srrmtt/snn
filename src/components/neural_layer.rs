@@ -52,7 +52,7 @@ impl NeuralLayer {
     pub fn add_synapse(&mut self, neuron: usize, weight: f32, channel: Receiver<i8>) {
         // aggiunge una sinapsi ricevendo peso e receiver a un neurone, return di result se neuron è out of bounds
         let s = Synapse::new(weight, channel);
-        println!("adding synapses to neuron [{}]", &neuron);
+        // println!("adding synapses to neuron [{}]", &neuron);
         self.neurons[neuron].synapses.push(s);
     }
 

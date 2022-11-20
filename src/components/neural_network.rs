@@ -11,7 +11,7 @@ use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, 
 fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<f32>) -> f32 {
     let k = -(ts - ts_1) as f64 / tao;
 
-    let exponential = exp(k) as f32;
+    let exponential = std::f64::consts::E.powf(k) as f32;
 
     let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
 
@@ -157,14 +157,14 @@ impl NeuralNetwork {
         //TODO  check the weights dimension
         let mut capacity = 0;
         if to == from {
-            capacity = 10;
+            capacity = 1;
         }
         for (i, row) in weights.iter().enumerate() {
             // for each neuron connected to the sender add the receiver end
             for (j, weight) in row.iter().enumerate() {
                 let (tx, rx) = sync_channel(capacity);
                 if *weight != 0.0 {
-                        println!("---[layer {} - {}] connecting neuron {} with neuron {}",to, from, i, j);
+                        // println!("---[layer {} - {}] connecting neuron {} with neuron {}",to, from, i, j);
                         self.neural_layers[to].add_synapse(j, *weight, rx);
                         // add the sender (tx) part of the channel to the 'to' layer
                         self.neural_layers[from].add_sender(i, tx);

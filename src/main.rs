@@ -7,9 +7,10 @@ use crate::components::output::OutputMonitor;
 
 fn main() {
     let output_file = "out.txt"; 
-
+    println!("-------------------- START -------------------");
+    println!("--- Creating neural network from test.json...");
     let mut nn=NeuralNetwork::from_JSON("test.json");
-  
+    println!("\t\tDONE.");
    /* let input_w = vec![vec![10, 1], vec![5, 1]];
 
     
@@ -26,5 +27,7 @@ fn main() {
     let om = OutputMonitor::new(output_file);
 
     nn.connect_output(om);
+    println!("--- Starting simulation...");
     nn.run(); 
+    println!("\t\tDONE.")
 }

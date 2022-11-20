@@ -84,7 +84,7 @@ impl InputLayer {
     pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<i8>) {
         // add a sender to the n_input-th input object 
         // TODO return a result<Ok<()>,Error> for out of bounds error  
-        println!("adding sender to input [{}]", &n_input);
+        // println!("adding sender to input [{}]", &n_input);
         self.inputs[n_input].add_sender(tx);
     }
 
@@ -105,7 +105,7 @@ impl InputLayer {
     }
 
     pub fn to_string(&self) -> String {
-        let mut res = format!("input layer with [{}] inputs.\n", self.inputs.len());
+        let res = format!("input layer with [{}] inputs.\n", self.inputs.len());
         // for input in &self.inputs {
         //     res = format!("{}\n\t{}", res, input.to_string());
         // }

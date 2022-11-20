@@ -1,0 +1,2592 @@
+   Compiling snn v0.1.0 (/home/matteo/Documents/GitHub/snn)
+warning: unused import: `libm::exp`
+ --> src/components/neural_network.rs:5:5
+  |
+5 | use libm::exp;
+  |     ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `e`
+  --> src/components/output.rs:64:25
+   |
+64 |                     Err(e) => break,
+   |                         ^ help: if this is intentional, prefix it with an underscore: `_e`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: associated function `from_file` is never used
+  --> src/components/input.rs:25:12
+   |
+25 |     pub fn from_file(filename: &str) -> Result<Self, std::io::Error> {
+   |            ^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: associated function `from_files` is never used
+  --> src/components/input_layer.rs:68:12
+   |
+68 |     pub fn from_files(filenames: &[&str]) -> Self {
+   |            ^^^^^^^^^^
+
+warning: associated function `to_string` is never used
+   --> src/components/input_layer.rs:107:12
+    |
+107 |     pub fn to_string(&self) -> String {
+    |            ^^^^^^^^^
+
+warning: associated function `to_string` is never used
+   --> src/components/neural_network.rs:224:12
+    |
+224 |     pub fn to_string(&self) -> String {
+    |            ^^^^^^^^^
+
+warning: field `name` is never read
+  --> src/components/neuron.rs:32:5
+   |
+11 | pub struct Neuron {
+   |            ------ field in this struct
+...
+32 |     name: String,
+   |     ^^^^
+
+warning: associated function `to_string` is never used
+   --> src/components/neuron.rs:159:12
+    |
+159 |     pub fn to_string(&self) -> String {
+    |            ^^^^^^^^^
+
+warning: fields `filename` and `outputs` are never read
+  --> src/components/output.rs:11:5
+   |
+7  | pub struct OutputMonitor {
+   |            ------------- fields in this struct
+...
+11 |     filename: String,
+   |     ^^^^^^^^
+...
+15 |     outputs: Vec<i8>,
+   |     ^^^^^^^
+
+warning: method `from_JSON` should have a snake case name
+  --> src/components/neural_network.rs:80:12
+   |
+80 |     pub fn from_JSON(path: &str)->NeuralNetwork{
+   |            ^^^^^^^^^ help: convert the identifier to snake case: `from_json`
+   |
+   = note: `#[warn(non_snake_case)]` on by default
+
+warning: unused `Result` that must be used
+   --> src/components/neural_network.rs:139:9
+    |
+139 |         tid_output.join();
+    |         ^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: `snn` (bin "snn") generated 11 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.88s
+     Running `target/debug/snn`
+-------------------- START -------------------
+--- Creating neural network from test.json...
+Creating a Neural Layer with 400 neurons.
+		DONE.
+--- Starting simulation...
+	 Output Monitor: 0 at [0]
+	 Output Monitor: 0 at [1]
+	 Output Monitor: 0 at [2]
+	 Output Monitor: 0 at [3]
+	 Output Monitor: 0 at [4]
+	 Output Monitor: 0 at [5]
+	 Output Monitor: 0 at [6]
+	 Output Monitor: 0 at [7]
+	 Output Monitor: 0 at [8]
+	 Output Monitor: 0 at [9]
+	 Output Monitor: 0 at [10]
+	 Output Monitor: 0 at [11]
+	 Output Monitor: 0 at [12]
+	 Output Monitor: 0 at [13]
+	 Output Monitor: 0 at [14]
+	 Output Monitor: 0 at [15]
+	 Output Monitor: 0 at [16]
+	 Output Monitor: 0 at [17]
+	 Output Monitor: 0 at [18]
+	 Output Monitor: 0 at [19]
+	 Output Monitor: 0 at [20]
+	 Output Monitor: 0 at [21]
+	 Output Monitor: 0 at [22]
+	 Output Monitor: 0 at [23]
+	 Output Monitor: 0 at [24]
+	 Output Monitor: 0 at [25]
+	 Output Monitor: 0 at [26]
+	 Output Monitor: 0 at [27]
+	 Output Monitor: 0 at [28]
+	 Output Monitor: 0 at [29]
+	 Output Monitor: 0 at [30]
+	 Output Monitor: 0 at [31]
+	 Output Monitor: 0 at [32]
+	 Output Monitor: 0 at [33]
+	 Output Monitor: 0 at [34]
+	 Output Monitor: 0 at [35]
+	 Output Monitor: 0 at [36]
+	 Output Monitor: 0 at [37]
+	 Output Monitor: 0 at [38]
+	 Output Monitor: 0 at [39]
+	 Output Monitor: 0 at [40]
+	 Output Monitor: 0 at [41]
+	 Output Monitor: 0 at [42]
+	 Output Monitor: 0 at [43]
+	 Output Monitor: 0 at [44]
+	 Output Monitor: 0 at [45]
+	 Output Monitor: 0 at [46]
+	 Output Monitor: 0 at [47]
+	 Output Monitor: 0 at [48]
+	 Output Monitor: 0 at [49]
+	 Output Monitor: 0 at [50]
+	 Output Monitor: 0 at [51]
+	 Output Monitor: 0 at [52]
+	 Output Monitor: 0 at [53]
+	 Output Monitor: 0 at [54]
+	 Output Monitor: 0 at [55]
+	 Output Monitor: 0 at [56]
+	 Output Monitor: 0 at [57]
+	 Output Monitor: 0 at [58]
+	 Output Monitor: 0 at [59]
+	 Output Monitor: 0 at [60]
+	 Output Monitor: 0 at [61]
+	 Output Monitor: 0 at [62]
+	 Output Monitor: 0 at [63]
+	 Output Monitor: 0 at [64]
+	 Output Monitor: 0 at [65]
+	 Output Monitor: 0 at [66]
+	 Output Monitor: 0 at [67]
+	 Output Monitor: 0 at [68]
+	 Output Monitor: 0 at [69]
+	 Output Monitor: 0 at [70]
+	 Output Monitor: 0 at [71]
+	 Output Monitor: 0 at [72]
+	 Output Monitor: 0 at [73]
+	 Output Monitor: 0 at [74]
+	 Output Monitor: 0 at [75]
+	 Output Monitor: 0 at [76]
+	 Output Monitor: 0 at [77]
+	 Output Monitor: 0 at [78]
+	 Output Monitor: 0 at [79]
+	 Output Monitor: 0 at [80]
+	 Output Monitor: 0 at [81]
+	 Output Monitor: 0 at [82]
+	 Output Monitor: 0 at [83]
+	 Output Monitor: 0 at [84]
+	 Output Monitor: 0 at [85]
+	 Output Monitor: 0 at [86]
+	 Output Monitor: 0 at [87]
+	 Output Monitor: 0 at [88]
+	 Output Monitor: 0 at [89]
+	 Output Monitor: 0 at [90]
+	 Output Monitor: 0 at [91]
+	 Output Monitor: 0 at [92]
+	 Output Monitor: 0 at [93]
+	 Output Monitor: 0 at [94]
+	 Output Monitor: 0 at [95]
+	 Output Monitor: 0 at [96]
+	 Output Monitor: 0 at [97]
+	 Output Monitor: 0 at [98]
+	 Output Monitor: 0 at [99]
+	 Output Monitor: 0 at [100]
+	 Output Monitor: 0 at [101]
+	 Output Monitor: 0 at [102]
+	 Output Monitor: 0 at [103]
+	 Output Monitor: 0 at [104]
+	 Output Monitor: 0 at [105]
+	 Output Monitor: 0 at [106]
+	 Output Monitor: 0 at [107]
+	 Output Monitor: 0 at [108]
+	 Output Monitor: 0 at [109]
+	 Output Monitor: 0 at [110]
+	 Output Monitor: 0 at [111]
+	 Output Monitor: 0 at [112]
+	 Output Monitor: 0 at [113]
+	 Output Monitor: 0 at [114]
+	 Output Monitor: 0 at [115]
+	 Output Monitor: 0 at [116]
+	 Output Monitor: 0 at [117]
+	 Output Monitor: 0 at [118]
+	 Output Monitor: 0 at [119]
+	 Output Monitor: 0 at [120]
+	 Output Monitor: 0 at [121]
+	 Output Monitor: 0 at [122]
+	 Output Monitor: 0 at [123]
+	 Output Monitor: 0 at [124]
+	 Output Monitor: 0 at [125]
+	 Output Monitor: 0 at [126]
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rsthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rsthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflowsrc/components/neuron.rs:152:13
+:152' panicked at 'attempt to add with overflowthread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rsthread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>13
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+error Any { .. } during join neural_netowork run() method
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowsending on a closed channel', ', src/components/neuron.rssrc/components/neuron.rs::152101::1327
+
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rsthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflowthread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+error Any { .. } during join neural_netowork run() method
+thread '<unnamed>' panicked at 'thread 'sending on a closed channel<unnamed>', ' panicked at 'src/components/neuron.rssending on a closed channel:', 101src/components/neuron.rs::27101
+:27
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/neuron.rsattempt to add with overflow:', 152src/components/neuron.rs::13152
+:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rsthread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflowthread '<unnamed>thread 'thread 'thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rsthread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/neuron.rs<unnamed>:' panicked at '152attempt to add with overflow:', 13src/components/input.rs
+:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread 'thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rsthread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/neuron.rs', :src/components/neuron.rs152::15213:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelsending on a closed channel', ', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread ':152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel', ' panicked at 'src/components/neuron.rssending on a closed channel:', 101src/components/neuron.rs::27101
+:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/neuron.rs:152:13
+<unnamed>:13', src/components/neuron.rs' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>101:27
+' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/neuron.rssending on a closed channel:', 152src/components/neuron.rs::13101
+:27
+:152:13
+src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow13' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+
+' panicked at 'attempt to add with overflow' panicked at '', ' panicked at 'attempt to add with overflow' panicked at 'src/components/neuron.rsattempt to add with overflow', attempt to add with overflow:', src/components/neuron.rs', 152src/components/neuron.rs:src/components/neuron.rs::152:13152:152
+:13:13
+13
+
+<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/neuron.rssrc/components/input.rs::15264::1313
+
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at ':152thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowsending on a closed channel', ', src/components/input.rssrc/components/neuron.rs::64101::1327
+
+attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'sending on a closed channelthread '', <unnamed>src/components/neuron.rs' panicked at ':sending on a closed channel101', :src/components/neuron.rs27:
+101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+', thread 'thread 'thread '<unnamed><unnamed><unnamed>' panicked at '' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflowattempt to add with overflow', ', ', src/components/input.rssrc/components/input.rssrc/components/input.rs:::646464:13
+src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'thread '<unnamed>src/components/neuron.rs' panicked at ':sending on a closed channel152', :src/components/neuron.rs13:
+101:thread '27<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+sending on a closed channel', src/components/neuron.rsthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13' panicked at 'attempt to add with overflow' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/neuron.rsattempt to add with overflow:', 152src/components/input.rs::1364
+:13
+thread 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '27
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'attempt to add with overflowthread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+sending on a closed channel', src/components/neuron.rs' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13' panicked at '
+attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101thread ':<unnamed>27' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+<unnamed>' panicked at 'sending on a closed channelattempt to add with overflowthread '', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+src/components/neuron.rs:101:27
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread ':101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at '101sending on a closed channelthread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+<unnamed>' panicked at 'thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:thread '<unnamed>' panicked at 'thread 'thread 'sending on a closed channel<unnamed><unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', attempt to add with overflowsrc/components/neuron.rs', :src/components/input.rs101::6427:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', <unnamed>src/components/input.rs' panicked at ':sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+152:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+27
+thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelattempt to add with overflow', ', src/components/neuron.rssrc/components/input.rs::10164::2713
+
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '', src/components/neuron.rs:' panicked at '152attempt to add with overflow:', 13src/components/neuron.rs
+:152:13
+thread '<unnamed><unnamed>' panicked at 'sending on a closed channel' panicked at '', attempt to add with overflow' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:13
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed><unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at '64attempt to add with overflow:', 13thread 'src/components/input.rs
+<unnamed>:' panicked at '64attempt to add with overflow:', 13src/components/input.rs
+:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread 'thread '<unnamed><unnamed><unnamed>' panicked at '' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflowattempt to add with overflow', ', ', src/components/input.rssrc/components/input.rssrc/components/input.rs:::646464:::131313
+
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', <unnamed>src/components/input.rs' panicked at ':attempt to add with overflow64', :src/components/input.rs13:
+64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+152:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+attempt to add with overflowthread '', <unnamed>src/components/neuron.rs' panicked at ':attempt to add with overflow152', :src/components/input.rs13:
+64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', attempt to add with overflowsrc/components/neuron.rs', :src/components/input.rs101::6427:
+13
+thread 'thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowsending on a closed channel', ', src/components/input.rssrc/components/neuron.rs::64101::1327
+
+thread '<unnamed>' panicked at 'sending on a closed channel' panicked at '', sending on a closed channelsrc/components/neuron.rs', :src/components/neuron.rs101:101:27
+thread '<unnamed>' panicked at '<unnamed>sending on a closed channel', attempt to add with overflow', thread 'src/components/neuron.rs<unnamed>:' panicked at '152attempt to add with overflow:13', 
+src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'sending on a closed channelthread '', src/components/neuron.rs<unnamed>:101' panicked at ':attempt to add with overflow27', 
+src/components/input.rs:64:13
+:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', <unnamed>src/components/input.rs' panicked at ':sending on a closed channel', src/components/neuron.rs:64101::1327
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflow<unnamed>thread 'thread '<unnamed>thread '<unnamed>thread '' panicked at '<unnamed>' panicked at '<unnamed>attempt to add with overflow' panicked at 'sending on a closed channel' panicked at '', sending on a closed channel', sending on a closed channelsrc/components/input.rs', src/components/neuron.rs', :src/components/neuron.rs:src/components/neuron.rs64:101::101:10113:27:
+27
+27
+
+thread '' panicked at '<unnamed>thread 'sending on a closed channelsrc/components/neuron.rsthread ':<unnamed>' panicked at '152thread '<unnamed>' panicked at 'attempt to add with overflow', ' panicked at 'src/components/input.rsattempt to add with overflow:', thread '64src/components/neuron.rs<unnamed>::' panicked at '13152attempt to add with overflow
+:', 13src/components/input.rs
+:64:13
+attempt to add with overflow', src/components/neuron.rs:152thread ':<unnamed>13' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+attempt to add with overflow', src/components/neuron.rs:152:13
+thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/neuron.rs', :src/components/input.rs152::6413:
+13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed><unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rsthread ':<unnamed>101' panicked at ':sending on a closed channel27', 
+src/components/neuron.rs:101:27
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+<unnamed>' panicked at '<unnamed>:64thread '<unnamed>' panicked at 'thread 'attempt to add with overflowsrc/components/neuron.rs' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+sending on a closed channelthread '<unnamed>thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread 'thread 'thread '<unnamed><unnamed><unnamed>' panicked at '' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflowattempt to add with overflow', ', ', src/components/input.rssrc/components/input.rssrc/components/input.rs:::646464:::131313
+
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13thread '
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '' panicked at 'sending on a closed channelthread '', <unnamed>src/components/neuron.rs' panicked at ':sending on a closed channel101', :src/components/neuron.rs27:
+101:27
+thread '<unnamed>' panicked at '<unnamed>sending on a closed channel' panicked at '', sending on a closed channelsrc/components/neuron.rs', :src/components/neuron.rs101::27101
+:27
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channel' panicked at 'sending on a closed channel', sending on a closed channel', src/components/neuron.rs:101:src/components/neuron.rs27:
+101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+
+:152:13
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+', src/components/neuron.rs', src/components/neuron.rs:152:13
+', ' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+' panicked at 'attempt to add with overflow', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rsattempt to add with overflow', src/components/neuron.rs:152:13
+101thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflowthread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>' panicked at 'thread 'sending on a closed channel<unnamed>', ' panicked at 'src/components/neuron.rssending on a closed channel:', 101src/components/neuron.rs::27101
+:27
+:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channel', src/components/neuron.rs' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+', src/components/neuron.rs:152:13
+', src/components/neuron.rs:152:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', sending on a closed channelsrc/components/neuron.rs', :src/components/neuron.rs101::10127
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelsending on a closed channel', ', src/components/neuron.rs:101:src/components/neuron.rs27:
+101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at '64attempt to add with overflow:', 13src/components/input.rs
+:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelsending on a closed channel', ', src/components/neuron.rssrc/components/neuron.rs::101101::2727
+
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>:13thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', thread 'src/components/neuron.rs<unnamed>:' panicked at '101attempt to add with overflow:', 27src/components/input.rs
+:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rsthread ':<unnamed>64' panicked at ':attempt to add with overflow13', 
+src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/input.rssending on a closed channel:', 64src/components/neuron.rs::13101
+:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rsthread ':<unnamed>64' panicked at ':attempt to add with overflow13', 
+src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channelthread 'thread '', <unnamed><unnamed>src/components/neuron.rs' panicked at '' panicked at ':attempt to add with overflowattempt to add with overflow101', ', :src/components/input.rssrc/components/input.rs27::
+6464::1313
+
+thread '<unnamed>' panicked at 'thread 'sending on a closed channelthread '<unnamed>', <unnamed>' panicked at 'src/components/neuron.rs' panicked at 'attempt to add with overflow:attempt to add with overflow', 101', src/components/input.rs:src/components/input.rs:27:64
+64::1313
+
+thread 'thread '<unnamed>thread '<unnamed>' panicked at '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflow', attempt to add with overflow', src/components/input.rs', src/components/input.rs:src/components/input.rs:64:64:13:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+64:13
+64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', <unnamed>src/components/input.rs' panicked at ':attempt to add with overflow64', :src/components/input.rs13:
+64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:thread '<unnamed>thread '<unnamed>thread '<unnamed>thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64thread ':<unnamed>13' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread 'thread '<unnamed>64' panicked at ':attempt to add with overflow13', 
+src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at '64attempt to add with overflow:', 13src/components/input.rs
+:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelattempt to add with overflow', ', src/components/neuron.rssrc/components/input.rs::10164::2713
+
+thread 'thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/input.rssending on a closed channel', :src/components/neuron.rs:64101::1327
+
+thread 'thread 'thread '<unnamed><unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>attempt to add with overflow<unnamed>' panicked at '', attempt to add with overflowsrc/components/input.rsthread '', :<unnamed>src/components/input.rs64:' panicked at ':13
+attempt to add with overflow64:', 13src/components/input.rs
+:64thread ':<unnamed>13' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13thread '
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>thread '' panicked at '' panicked at '<unnamed>attempt to add with overflowattempt to add with overflow' panicked at '', ', attempt to add with overflowsrc/components/input.rssrc/components/input.rs', ::src/components/input.rs6464:::641313thread ':
+
+<unnamed>13' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed>thread 'thread '<unnamed>thread '<unnamed>thread '' panicked at '<unnamed>' panicked at '<unnamed>attempt to add with overflow' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow', attempt to add with overflowsrc/components/input.rs', src/components/input.rs', :src/components/input.rs:src/components/input.rs64:64::64:6413:13:
+13
+13
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rsthread '<unnamed>:<unnamed>' panicked at '64' panicked at 'attempt to add with overflow:attempt to add with overflow', 13', src/components/input.rs
+src/components/input.rs::6464:thread ':13<unnamed>13
+' panicked at '
+attempt to add with overflow', src/components/input.rs:64:thread '13<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:thread '13<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:thread 'thread '13<unnamed><unnamed>
+' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', thread '', src/components/input.rs<unnamed>src/components/input.rs:' panicked at ':64attempt to add with overflow64:', :13src/components/input.rs13
+:
+64:13thread '
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>attempt to add with overflowthread '<unnamed>' panicked at '', <unnamed>' panicked at 'attempt to add with overflowsrc/components/input.rs' panicked at 'attempt to add with overflow', :attempt to add with overflow', src/components/input.rs64', src/components/input.rs::src/components/input.rs:6413:64:
+64:13:13
+13thread '
+
+<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rsthread '', :<unnamed>thread 'src/components/input.rs64' panicked at '<unnamed>::attempt to add with overflow' panicked at '6413', attempt to add with overflow:
+src/components/input.rs', 13:src/components/input.rs
+64thread '::<unnamed>6413thread '' panicked at ':
+<unnamed>attempt to add with overflow13' panicked at '', 
+attempt to add with overflowsrc/components/input.rs', thread ':src/components/input.rs<unnamed>64thread ':' panicked at ':<unnamed>64attempt to add with overflow13' panicked at ':', 
+attempt to add with overflow13src/components/input.rs', 
+thread ':src/components/input.rs<unnamed>64:' panicked at 'thread ':64attempt to add with overflow<unnamed>13:', ' panicked at '
+13src/components/input.rsattempt to add with overflow
+:', 64thread 'src/components/input.rs:<unnamed>:thread '13thread '' panicked at '64<unnamed>
+<unnamed>attempt to add with overflow:' panicked at '' panicked at 'thread '', 13attempt to add with overflowattempt to add with overflow<unnamed>src/components/input.rs
+', ' panicked at ':src/components/input.rsattempt to add with overflow64:thread '', :64<unnamed>src/components/input.rs13:' panicked at ':
+13attempt to add with overflow64
+', :src/components/input.rs13thread 'thread ':
+<unnamed><unnamed>thread '64' panicked at 'thread '' panicked at '<unnamed>:attempt to add with overflow<unnamed>attempt to add with overflow' panicked at '13', ' panicked at '', attempt to add with overflow
+src/components/input.rsattempt to add with overflowsrc/components/input.rs', :', :thread 'src/components/input.rs64src/components/input.rs64<unnamed>::::' panicked at '64136413attempt to add with overflow:
+:
+', 1313src/components/input.rs
+thread '
+:thread '<unnamed>64<unnamed>' panicked at ':thread '' panicked at 'attempt to add with overflow13<unnamed>attempt to add with overflow', 
+' panicked at '', src/components/input.rsattempt to add with overflowsrc/components/input.rs:', thread ':64src/components/input.rs<unnamed>64::' panicked at ':1364attempt to add with overflow13
+:', 
+13src/components/input.rs
+:thread '64<unnamed>:' panicked at 'thread '13attempt to add with overflow<unnamed>
+', ' panicked at 'src/components/input.rsattempt to add with overflow:', thread '64src/components/input.rs<unnamed>::' panicked at '1364attempt to add with overflow
+:', 13src/components/input.rsthread '
+<unnamed>:' panicked at '64attempt to add with overflow:thread '', 13<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at '64attempt to add with overflow:', 13src/components/input.rs
+:64:thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs:64:13
+thread 'thread '<unnamed>thread 'thread '<unnamed>' panicked at '<unnamed>' panicked at '<unnamed>' panicked at 'attempt to add with overflowattempt to add with overflow' panicked at 'attempt to add with overflow', ', attempt to add with overflow', src/components/input.rssrc/components/input.rs', src/components/input.rs::src/components/input.rs:6464:64::64:1313:13
+
+13
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13thread '
+<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at 'attempt to add with overflow64', :thread '13<unnamed>' panicked at '
+attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:13' panicked at '
+attempt to add with overflow', src/components/input.rsthread ':<unnamed>64' panicked at ':attempt to add with overflow13', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'thread 'sending on a closed channelattempt to add with overflow<unnamed>', ', ' panicked at 'src/components/neuron.rssrc/components/input.rsattempt to add with overflow::thread '', 10164src/components/input.rs:::271364
+
+:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>attempt to add with overflow<unnamed>' panicked at '', ' panicked at 'attempt to add with overflowsrc/components/input.rsattempt to add with overflow', :', src/components/input.rs64src/components/input.rs:::641364:
+:1313
+
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread 'thread 'thread '<unnamed><unnamed><unnamed>' panicked at '' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflowattempt to add with overflow', ', ', src/components/input.rssrc/components/input.rssrc/components/input.rs:::646464:::131313
+
+
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', <unnamed>src/components/input.rs' panicked at ':attempt to add with overflow64', :src/components/input.rs13:thread '
+64<unnamed>:thread '' panicked at 'thread '13<unnamed>thread 'attempt to add with overflow<unnamed>
+' panicked at '<unnamed>', ' panicked at 'attempt to add with overflow' panicked at 'src/components/input.rsattempt to add with overflow', attempt to add with overflow:', thread 'src/components/input.rs', 64src/components/input.rs<unnamed>:src/components/input.rs::' panicked at '64:1364attempt to add with overflow:64
+:', 13:13src/components/input.rs
+13thread '
+:
+<unnamed>64' panicked at ':attempt to add with overflowthread '13thread '', <unnamed>
+<unnamed>src/components/input.rs' panicked at '' panicked at ':attempt to add with overflowattempt to add with overflow64thread '', ', :<unnamed>src/components/input.rssrc/components/input.rs13' panicked at '::
+attempt to add with overflow6464', ::src/components/input.rs1313thread ':
+
+<unnamed>64' panicked at ':thread 'attempt to add with overflow13<unnamed>', 
+' panicked at 'src/components/input.rsattempt to add with overflow:', 64src/components/input.rs:thread ':13<unnamed>64
+' panicked at 'thread ':attempt to add with overflow<unnamed>13', thread '' panicked at '
+src/components/input.rs<unnamed>attempt to add with overflow:' panicked at 'thread '', 64attempt to add with overflow<unnamed>src/components/input.rs:', ' panicked at ':13src/components/input.rsattempt to add with overflow64
+:', :64src/components/input.rs13:thread ':
+13<unnamed>64
+' panicked at ':attempt to add with overflow13thread '', 
+<unnamed>src/components/input.rsthread '' panicked at ':<unnamed>thread 'attempt to add with overflow64' panicked at '<unnamed>', :attempt to add with overflow' panicked at 'src/components/input.rs13', attempt to add with overflow:
+src/components/input.rs', 64:src/components/input.rs:64:13thread ':64
+<unnamed>13:' panicked at '
+13attempt to add with overflowthread '
+thread '', <unnamed>thread 'thread '<unnamed>src/components/input.rs' panicked at '<unnamed><unnamed>' panicked at ':attempt to add with overflow' panicked at '' panicked at 'attempt to add with overflow64', attempt to add with overflow', src/components/input.rssrc/components/input.rs::thread '6464thread '<unnamed>thread '::<unnamed>' panicked at '<unnamed>1313' panicked at 'attempt to add with overflow' panicked at '
+
+attempt to add with overflow', attempt to add with overflow', src/components/input.rs', src/components/input.rs:src/components/input.rs:64:64:64:13:13thread '
+13
+<unnamed>
+' panicked at 'thread 'thread 'attempt to add with overflowthread '<unnamed><unnamed>', <unnamed>' panicked at '' panicked at 'src/components/input.rs' panicked at 'attempt to add with overflowattempt to add with overflow:attempt to add with overflow', ', 64thread '', src/components/input.rssrc/components/input.rs:<unnamed>src/components/input.rs::13' panicked at ':6464
+sending on a closed channel64::', :1313src/components/neuron.rsthread '13
+
+:<unnamed>
+101' panicked at 'thread ':attempt to add with overflow<unnamed>27', ' panicked at '
+src/components/input.rsattempt to add with overflow:', 64src/components/input.rsthread '::<unnamed>1364' panicked at '
+:attempt to add with overflow13', 
+thread 'src/components/input.rsthread '<unnamed>:<unnamed>' panicked at '64' panicked at 'attempt to add with overflow:attempt to add with overflow', 13', src/components/input.rs
+src/components/input.rs::6464::1313
+thread '
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', :13:thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rsthread '::<unnamed>6464' panicked at '::sending on a closed channel1313', 
+
+src/components/neuron.rs:101thread ':<unnamed>27' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread 'thread '<unnamed>thread '<unnamed><unnamed>' panicked at '<unnamed>' panicked at '' panicked at 'sending on a closed channel' panicked at 'attempt to add with overflowattempt to add with overflow', attempt to add with overflow', ', src/components/neuron.rs', src/components/input.rssrc/components/input.rs:src/components/input.rsthread '::101:<unnamed>6464:64' panicked at '::27:sending on a closed channel1313
+13', 
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64<unnamed>:' panicked at '13attempt to add with overflow
+', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread 'thread '<unnamed><unnamed>' panicked at '' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>attempt to add with overflow<unnamed>thread '' panicked at '', ' panicked at '<unnamed>attempt to add with overflowsrc/components/input.rsattempt to add with overflow' panicked at '', :', attempt to add with overflowsrc/components/input.rs64src/components/input.rs', :::src/components/input.rs641364::
+:641313:
+
+
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>thread 'attempt to add with overflow<unnamed>' panicked at '<unnamed>', ' panicked at 'attempt to add with overflow' panicked at 'src/components/input.rsattempt to add with overflow', sending on a closed channel:', src/components/input.rs', 64src/components/input.rs:src/components/neuron.rs::64:1364:101
+:13:13
+27
+
+thread '<unnamed>' panicked at 'sending on a closed channel', ', src/components/neuron.rs', src/components/neuron.rs:src/components/neuron.rs:152:101:101:13:27
+27
+
+', src/components/neuron.rs::101', 152:', src/components/neuron.rs:27src/components/neuron.rs:13
+:152
+152::thread '1313<unnamed>
+
+thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', thread 'attempt to add with overflowsrc/components/input.rsthread '<unnamed>', :<unnamed>' panicked at 'src/components/input.rs64' panicked at 'attempt to add with overflow::attempt to add with overflow', 6413', src/components/input.rs:
+src/components/input.rs:13:64thread '
+64:<unnamed>:13' panicked at 'thread '13
+attempt to add with overflow<unnamed>
+', ' panicked at 'thread 'src/components/input.rsattempt to add with overflow<unnamed>thread ':', ' panicked at '<unnamed>64src/components/input.rsattempt to add with overflow' panicked at '::', attempt to add with overflow1364src/components/input.rs', 
+::src/components/input.rs1364thread ':
+:<unnamed>6413' panicked at ':thread '
+attempt to add with overflow13<unnamed>', 
+thread '' panicked at 'src/components/input.rs<unnamed>attempt to add with overflow:thread '' panicked at '', 64<unnamed>attempt to add with overflowsrc/components/input.rs:' panicked at '', :13attempt to add with overflowsrc/components/input.rs64
+', ::src/components/input.rs64thread '13::<unnamed>
+6413' panicked at ':
+attempt to add with overflowthread '13', <unnamed>thread '
+src/components/input.rs' panicked at '<unnamed>:attempt to add with overflowthread '' panicked at '64', <unnamed>attempt to add with overflow:src/components/input.rs' panicked at '', 13:attempt to add with overflowsrc/components/input.rs
+64', ::src/components/input.rsthread '6413:<unnamed>:
+64' panicked at '13:attempt to add with overflow
+thread '13', <unnamed>
+', ' panicked at '<unnamed>src/components/input.rs:attempt to add with overflow' panicked at ':27', attempt to add with overflow64
+src/components/input.rs', ::src/components/input.rs1364:
+:6413:
+13', 
+thread 'src/components/neuron.rs<unnamed>:' panicked at '101attempt to add with overflow:', 27src/components/input.rs
+:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflow' panicked at '<unnamed>', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>sending on a closed channel' panicked at '', attempt to add with overflowsrc/components/neuron.rs', :src/components/input.rs101::6427:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'sending on a closed channel' panicked at '<unnamed>', sending on a closed channel' panicked at 'src/components/neuron.rs', attempt to add with overflow:src/components/neuron.rs', 101:src/components/input.rs:101:27:64
+27:
+13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'sending on a closed channel' panicked at '<unnamed>', sending on a closed channel' panicked at 'src/components/neuron.rs', attempt to add with overflow:src/components/neuron.rs', 101:src/components/input.rs:101:27:64
+27:
+13
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'sending on a closed channel', ' panicked at '' panicked at '<unnamed>', sending on a closed channelattempt to add with overflow' panicked at 'src/components/neuron.rs', ', attempt to add with overflow:src/components/neuron.rssrc/components/input.rs', 101::src/components/input.rs:10164:27::64
+2713:
+
+13
+thread '<unnamed>' panicked at 'src/components/neuron.rsattempt to add with overflowthread ':', <unnamed>src/components/input.rsthread '' panicked at ':<unnamed>attempt to add with overflow64' panicked at '101', :attempt to add with overflow:src/components/input.rs13', 27:
+src/components/input.rs
+64::64thread '13:<unnamed>thread '
+13' panicked at '<unnamed>
+attempt to add with overflow' panicked at '', thread 'attempt to add with overflowsrc/components/input.rs<unnamed>thread '', :' panicked at '<unnamed>src/components/input.rs64attempt to add with overflow' panicked at '::', attempt to add with overflow6413src/components/input.rs', :
+:src/components/input.rs1364:
+thread ':64<unnamed>13:thread '' panicked at '
+13<unnamed>attempt to add with overflow
+' panicked at '', attempt to add with overflowthread 'src/components/input.rs', <unnamed>thread ':src/components/input.rs' panicked at '<unnamed>64:sending on a closed channel' panicked at ':64', attempt to add with overflow13:src/components/neuron.rs', 
+13:src/components/input.rs
+101::6427thread ':
+<unnamed>13' panicked at '
+thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/input.rsthread 'attempt to add with overflow<unnamed>:', ' panicked at '64src/components/input.rsattempt to add with overflow::', 1364thread 'src/components/input.rs
+:<unnamed>:13' panicked at '64
+attempt to add with overflow:', thread '13thread 'src/components/input.rs<unnamed>
+<unnamed>:' panicked at '' panicked at 'thread '64attempt to add with overflowattempt to add with overflow<unnamed>:', ', ' panicked at '13src/components/input.rssrc/components/input.rsattempt to add with overflow
+::', 6464thread 'src/components/input.rs::<unnamed>:1313' panicked at '64
+
+attempt to add with overflow:', 13thread 'src/components/input.rsthread '
+<unnamed>:<unnamed>' panicked at '64' panicked at 'attempt to add with overflow:attempt to add with overflow', 13', src/components/input.rs
+src/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64thread '<unnamed>:<unnamed>' panicked at '13' panicked at 'attempt to add with overflow
+attempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>64:thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+', src/components/input.rsthread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at '' panicked at 'attempt to add with overflowthread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channelsrc/components/neuron.rs', :src/components/neuron.rs101::10127:
+27', 
+src/components/neuron.rs:152:13thread '
+<unnamed>' panicked at 'attempt to add with overflowthread '', thread '<unnamed>src/components/input.rs<unnamed>' panicked at ':' panicked at 'attempt to add with overflow64attempt to add with overflow', thread ':', src/components/input.rs<unnamed>13src/components/input.rs:' panicked at '
+:64attempt to add with overflow64:', :13src/components/input.rs13
+:
+64:13thread '
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflow' panicked at '<unnamed>', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', thread 'src/components/input.rs<unnamed>:' panicked at '64attempt to add with overflow:', 13src/components/input.rs
+:64:13thread '
+<unnamed>' panicked at 'attempt to add with overflowattempt to add with overflow', src/components/input.rsthread '', thread '<unnamed>' panicked at 'thread 'attempt to add with overflowthread '<unnamed>' panicked at '', <unnamed>' panicked at ':src/components/input.rs' panicked at 'attempt to add with overflow27:attempt to add with overflow', 
+64', src/components/input.rs:src/components/input.rs:13:64
+64::1313' panicked at '
+src/components/neuron.rs
+attempt to add with overflow:', 101src/components/input.rs::27<unnamed>64attempt to add with overflow' panicked at ':', sending on a closed channel13src/components/input.rs', 
+:src/components/neuron.rs64::10113', :<unnamed>
+src/components/input.rs27' panicked at ':
+sending on a closed channel64', :src/components/neuron.rs13' panicked at '
+attempt to add with overflow', src/components/input.rs:64:13
+', :13' panicked at '
+attempt to add with overflow', <unnamed>src/components/input.rs' panicked at ':sending on a closed channel64', :src/components/neuron.rsthread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+13:src/components/neuron.rs
+101::10127:27
+' panicked at '
+attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+', src/components/input.rs:64:13
+' panicked at 'sending on a closed channel' panicked at 'sending on a closed channelthread '', <unnamed>thread 'src/components/neuron.rs' panicked at '<unnamed>:sending on a closed channel' panicked at '101', sending on a closed channel:src/components/neuron.rs', 27:src/components/neuron.rs
+101::10127:
+27
+thread '<unnamed>thread '' panicked at 'thread 'sending on a closed channel<unnamed><unnamed>', ' panicked at '' panicked at 'src/components/neuron.rssending on a closed channelattempt to add with overflow:', ', 101src/components/neuron.rssrc/components/input.rs::64:13
+thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at 'thread '', attempt to add with overflowattempt to add with overflow<unnamed>', ', ' panicked at 'src/components/input.rssrc/components/neuron.rssending on a closed channel::', 64152src/components/neuron.rs:::1313101
+:27
+
+<unnamed>:13
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+src/components/neuron.rserror Any { .. } during join neural_netowork run() method
+' panicked at '', src/components/input.rs:64:13
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+', error Any { .. } during join neural_netowork run() method
+src/components/neuron.rserror Any { .. } during join neural_netowork run() method
+:error Any { .. } during join neural_netowork run() method
+101:27error Any { .. } during join neural_netowork run() method
+
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+sending on a closed channel:', thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/neuron.rssrc/components/input.rs::101thread 'error Any { .. } during join neural_netowork run() method
+thread '<unnamed><unnamed>thread '' panicked at 'thread '' panicked at '<unnamed>attempt to add with overflow<unnamed>attempt to add with overflow' panicked at '', ' panicked at '', attempt to add with overflowsrc/components/input.rsattempt to add with overflowsrc/components/input.rs', :', :src/components/input.rs64src/components/input.rs64::::64136413:
+:
+1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs::thread '6427thread '<unnamed>:
+<unnamed>' panicked at '13' panicked at 'attempt to add with overflow
+attempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>:' panicked at '152thread 'attempt to add with overflow:<unnamed>', 13' panicked at 'sending on a closed channelthread '', thread '<unnamed>src/components/neuron.rs<unnamed>' panicked at 'thread ':<unnamed>' panicked at 'sending on a closed channel101' panicked at 'attempt to add with overflow', :attempt to add with overflow', src/components/neuron.rs27', src/components/input.rs:
+src/components/input.rs:101:64:64:27:13thread '
+13
+<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/neuron.rs:thread '101', <unnamed>:thread 'src/components/input.rsthread '' panicked at '27:<unnamed>sending on a closed channel
+64' panicked at '', :attempt to add with overflowsrc/components/neuron.rs13', :
+src/components/input.rsthread '101:attempt to add with overflow<unnamed>:64:13
+<unnamed>' panicked at 'sending on a closed channel', ' panicked at '27', src/components/neuron.rsattempt to add with overflow
+src/components/neuron.rs:', :152src/components/input.rs101:::136427
+:
+13
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflow' panicked at '<unnamed>', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>attempt to add with overflow:<unnamed>' panicked at '', thread '' panicked at 'attempt to add with overflowsrc/components/input.rs<unnamed>attempt to add with overflow', :' panicked at '', src/components/input.rs64attempt to add with overflowsrc/components/input.rs::', :6413src/components/input.rs64:
+::thread '136413<unnamed>
+:
+' panicked at '13attempt to add with overflow
+', ' panicked at 'src/components/input.rssending on a closed channel:' panicked at '', 10164sending on a closed channelsrc/components/neuron.rsthread ':', :13<unnamed>src/components/neuron.rs101
+:' panicked at ':101attempt to add with overflow27
+:', 
+27src/components/input.rs
+attempt to add with overflow:' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs', ' panicked at 'attempt to add with overflow:src/components/input.rsattempt to add with overflow', 64:', src/components/input.rs:64src/components/input.rs:13::64
+1364:
+' panicked at ':13attempt to add with overflow13', 
+', 
+src/components/neuron.rssrc/components/input.rs:' panicked at ':152sending on a closed channel64:', :13' panicked at 'src/components/neuron.rs13
+sending on a closed channel:
+', 101src/components/neuron.rs::27101
+:27
+sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread ':<unnamed>101' panicked at ':attempt to add with overflow27', 
+src/components/input.rs:64:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs::attempt to add with overflow27101thread '', ' panicked at '
+:src/components/neuron.rsattempt to add with overflow27:', 
+152src/components/input.rsthread ':
+:' panicked at '1364attempt to add with overflow
+:', 13src/components/input.rs
+:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'thread 'attempt to add with overflow<unnamed>', ' panicked at 'src/components/input.rsattempt to add with overflow:', 64src/components/input.rs::1364
+:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101thread ':thread '<unnamed>27<unnamed>' panicked at '
+' panicked at 'attempt to add with overflowattempt to add with overflow', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '<unnamed>thread '' panicked at '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflowthread '', attempt to add with overflowsrc/components/input.rs<unnamed>thread '', :<unnamed>' panicked at 'src/components/input.rs64thread 'attempt to add with overflow::<unnamed>', 6413' panicked at 'src/components/input.rs:
+attempt to add with overflow:13', src/components/input.rs64
+:64::1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'thread '', attempt to add with overflowthread 'attempt to add with overflowsrc/components/input.rs', <unnamed>' panicked at 'attempt to add with overflow', src/components/input.rssrc/components/input.rs::6464::1313
+
+thread '', <unnamed>src/components/input.rs' panicked at ':thread 'attempt to add with overflow64' panicked at '<unnamed>', :attempt to add with overflow' panicked at 'src/components/input.rs13', attempt to add with overflow:
+src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+' panicked at '<unnamed><unnamed>attempt to add with overflowthread '' panicked at '' panicked at '', attempt to add with overflowattempt to add with overflowsrc/components/input.rs', ', :src/components/input.rssrc/components/input.rs64:::646413::
+1313
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:thread '64thread '<unnamed>:thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow<unnamed><unnamed>' panicked at 'attempt to add with overflow', ' panicked at '' panicked at 'attempt to add with overflow', src/components/input.rsattempt to add with overflowattempt to add with overflow', src/components/input.rs:', ', src/components/input.rs:64src/components/input.rssrc/components/input.rs:64:::64:136464:13
+::13
+1313thread '
+
+
+<unnamed><unnamed>' panicked at 'thread '' panicked at 'attempt to add with overflow<unnamed>attempt to add with overflow', ' panicked at '', src/components/input.rsattempt to add with overflowsrc/components/input.rs:', :64src/components/input.rs64:::136413
+:
+13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'thread 'attempt to add with overflow<unnamed>thread '', <unnamed>' panicked at 'thread 'src/components/input.rs' panicked at 'attempt to add with overflow<unnamed>:attempt to add with overflow', ' panicked at '64', src/components/input.rsattempt to add with overflow:src/components/input.rs:', 13:64src/components/input.rs
+64:::136413
+:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow<unnamed>' panicked at 'attempt to add with overflow', ' panicked at 'attempt to add with overflow', src/components/input.rsattempt to add with overflow', src/components/input.rs:', src/components/input.rs:64src/components/input.rs:64::64:1364:13
+:13
+13
+
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow' panicked at 'attempt to add with overflowthread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed><unnamed>' panicked at 'thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflow' panicked at 'thread '<unnamed>', attempt to add with overflow<unnamed>' panicked at 'src/components/input.rs', ' panicked at 'attempt to add with overflow:src/components/input.rssending on a closed channel', 64:', src/components/input.rs:64src/components/neuron.rs:13::64
+13101thread ':
+:<unnamed>thread '1327' panicked at '<unnamed>
+
+attempt to add with overflowthread '' panicked at '', <unnamed>sending on a closed channelsrc/components/input.rs' panicked at '', :attempt to add with overflowsrc/components/neuron.rs64', ::src/components/input.rs10113::
+6427:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflowthread '', thread '<unnamed>src/components/input.rs<unnamed>' panicked at ':' panicked at 'attempt to add with overflow64sending on a closed channel', :', src/components/input.rs13src/components/neuron.rs:
+:64101::1327
+
+thread '<unnamed>thread '' panicked at 'thread '<unnamed>thread 'sending on a closed channel<unnamed>' panicked at '<unnamed>', ' panicked at 'attempt to add with overflow' panicked at 'src/components/neuron.rsattempt to add with overflow', :', src/components/input.rs101src/components/input.rs:::64thread '2764:<unnamed>
+:13' panicked at 'thread '13
+attempt to add with overflow<unnamed>
+', ' panicked at 'src/components/input.rsattempt to add with overflow:', src/components/input.rs64::6413:13
+
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27src/components/input.rs
+:<unnamed>64' panicked at '' panicked at '' panicked at 'sending on a closed channelattempt to add with overflowattempt to add with overflow', ', ', src/components/neuron.rsthread 'src/components/input.rssrc/components/input.rs:<unnamed>::101' panicked at '6464:attempt to add with overflow::27', 1313
+src/components/input.rs
+
+:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', ', src/components/input.rsthread ':<unnamed>64' panicked at ':attempt to add with overflow13', 
+src/components/input.rs:64:13
+src/components/input.rs:
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rsthread '64:thread '<unnamed>:64' panicked at '<unnamed>:64<unnamed>' panicked at 'src/components/input.rs:thread 'attempt to add with overflow:13<unnamed>', 64
+' panicked at 'src/components/input.rs:attempt to add with overflow:13', 64
+src/components/input.rs::1364
+:13
+thread '
+<unnamed><unnamed>' panicked at 'thread '' panicked at '', attempt to add with overflow<unnamed>sending on a closed channelsrc/components/input.rs', ' panicked at '', :src/components/input.rsattempt to add with overflowsrc/components/neuron.rs64:', ::64attempt to add with overflowsrc/components/input.rs10113:', ::
+13src/components/input.rs6427
+::
+6413::
+thread '13<unnamed>
+' panicked at 'sending on a closed channel' panicked at '', attempt to add with overflowsrc/components/neuron.rsthread '', src/components/input.rs:
+<unnamed>src/components/input.rs:101' panicked at ':64
+:attempt to add with overflow64:27', :13src/components/neuron.rs
+src/components/input.rs13
+::
+10164::2713thread '
+thread '
+<unnamed><unnamed>' panicked at '' panicked at 'sending on a closed channelsending on a closed channel', thread '', thread 'src/components/neuron.rs<unnamed>src/components/neuron.rs<unnamed>:' panicked at ':' panicked at '101sending on a closed channel101sending on a closed channel:', :', 27src/components/neuron.rs27src/components/neuron.rs
+:
+:101101::thread '2727thread '<unnamed>
+
+<unnamed>' panicked at '' panicked at 'sending on a closed channelattempt to add with overflow', ', src/components/neuron.rssrc/components/input.rsthread '::thread '<unnamed>10164<unnamed>' panicked at '::' panicked at 'sending on a closed channel2713sending on a closed channel', 
+
+', src/components/neuron.rssrc/components/neuron.rs::101101::2727
+
+thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'sending on a closed channelthread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101thread ':thread '27<unnamed>
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13thread '
+<unnamed>thread '<unnamed>' panicked at 'sending on a closed channelthread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', sending on a closed channelthread 'src/components/neuron.rs', <unnamed>:src/components/neuron.rs' panicked at '101:sending on a closed channel:101', 27:src/components/neuron.rs
+27:
+101:27
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread 'thread 'thread '<unnamed>thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', sending on a closed channelsrc/components/neuron.rsthread '', thread ':<unnamed>src/components/neuron.rs<unnamed>101' panicked at ':' panicked at ':sending on a closed channel101sending on a closed channel27', :', 
+src/components/neuron.rs27src/components/neuron.rs:
+:101101::2727
+
+thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channel' panicked at '', thread 'sending on a closed channelsrc/components/neuron.rs<unnamed>', :' panicked at 'src/components/neuron.rs101sending on a closed channel::', 10127src/components/neuron.rs:
+:27101
+:27
+thread 'thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflow' panicked at '<unnamed>', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>thread '<unnamed>thread '' panicked at '<unnamed>sending on a closed channelthread '' panicked at '', attempt to add with overflow<unnamed>' panicked at 'thread 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101thread ':<unnamed>thread '27thread '' panicked at '<unnamed>
+<unnamed>sending on a closed channel' panicked at '' panicked at '', attempt to add with overflowattempt to add with overflowsrc/components/neuron.rs', ', :src/components/input.rssrc/components/input.rs101:::646427::
+1313
+
+thread '<unnamed>thread '' panicked at '<unnamed>thread 'attempt to add with overflowthread '' panicked at 'thread '<unnamed>thread '' panicked at '<unnamed>attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rsthread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'thread '<unnamed>' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+thread '<unnamed>' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+thread '<unnamed>src/components/input.rs' panicked at '' panicked at ':' panicked at 'attempt to add with overflowattempt to add with overflow64attempt to add with overflow', ', :', src/components/input.rssrc/components/input.rs13src/components/input.rs::
+:646464:::131313
+
+
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs', ' panicked at 'attempt to add with overflow:src/components/input.rsattempt to add with overflow', 64:', src/components/input.rs:64src/components/input.rs:13::64
+1364:
+:13' panicked at '13
+attempt to add with overflow
+13', 
+src/components/input.rs:64' panicked at ':' panicked at 'attempt to add with overflow13attempt to add with overflow' panicked at '', 
+', attempt to add with overflowsrc/components/input.rssrc/components/input.rs', :' panicked at ':src/components/input.rs64attempt to add with overflow64::', :6413src/components/input.rs13:
+:
+13' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13:
+64:' panicked at '13' panicked at 'attempt to add with overflow
+attempt to add with overflow', ' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs' panicked at 'attempt to add with overflow:attempt to add with overflow', 64', src/components/input.rs:src/components/input.rs:13:64
+64::13' panicked at '13attempt to add with overflow
+
+', src/components/input.rs:64:' panicked at '13' panicked at 'attempt to add with overflowattempt to add with overflow
+attempt to add with overflow', ', ', src/components/input.rs' panicked at 'src/components/input.rs:attempt to add with overflow:64', 64:src/components/input.rs:13:13
+64
+:13
+' panicked at 'attempt to add with overflow', ' panicked at 'src/components/input.rsattempt to add with overflow:', 64src/components/input.rs::1364
+:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+<unnamed>' panicked at ':attempt to add with overflow<unnamed>64src/components/input.rs', ' panicked at '::src/components/input.rsattempt to add with overflow1364:', 
+:64src/components/input.rs13::
+1364
+:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+attempt to add with overflow', src/components/input.rs:64:13
+
+:101:27
+', src/components/neuron.rs:101:27
+27
+:101::64:10113src/components/input.rs
+
+:64:13
+::' panicked at '27', 27
+src/components/input.rs
+:64:13
+64:13sending on a closed channel<unnamed>
+', ' panicked at 'sending on a closed channel:', 64src/components/neuron.rs::13101
+:27src/components/input.rs13
+' panicked at 'attempt to add with overflow', ' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+src/components/input.rs:' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+13
+', src/components/input.rs:64:13
+', ', src/components/input.rssrc/components/input.rs::6464::1313
+
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflowsrc/components/input.rs', :src/components/input.rs64::6413:
+13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflowattempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow' panicked at ':src/components/input.rs', attempt to add with overflow64:src/components/input.rs', :64:' panicked at 'src/components/input.rs13
+:src/components/input.rs64:attempt to add with overflow13::64', 
+6413:src/components/input.rs:
+13:13
+64
+:13
+' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs' panicked at '', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs::' panicked at '646413attempt to add with overflow::
+attempt to add with overflow', src/components/input.rs' panicked at ':attempt to add with overflowattempt to add with overflow64', ', ' panicked at ':src/components/input.rssrc/components/input.rsattempt to add with overflow13::', 
+6464' panicked at 'attempt to add with overflow' panicked at '', attempt to add with overflow' panicked at 'src/components/input.rs', attempt to add with overflow:src/components/input.rs', 64:src/components/input.rs:64:13:64
+13:
+13
+:1364
+:1313
+
+:13
+attempt to add with overflow', ' panicked at 'src/components/input.rs13attempt to add with overflow', :
+', src/components/neuron.rs64src/components/input.rs::<unnamed>:' panicked at '1011364attempt to add with overflow:', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+<unnamed>' panicked at '' panicked at 'sending on a closed channelsending on a closed channel<unnamed>', ', ' panicked at 'src/components/neuron.rssrc/components/neuron.rssending on a closed channel::', 101101src/components/neuron.rs:::2727101
+
+:27
+sending on a closed channel', src/components/neuron.rs:101:27
+' panicked at 'sending on a closed channelsrc/components/neuron.rs', ', :src/components/neuron.rsattempt to add with overflowsrc/components/input.rs101:' panicked at '', ' panicked at '::attempt to add with overflowsrc/components/input.rsattempt to add with overflow6427', :', :
+src/components/input.rs64src/components/input.rs13:::
+641364' panicked at ':
+:' panicked at 'attempt to add with overflow1313attempt to add with overflow' panicked at '', 
+
+', attempt to add with overflowsrc/components/input.rssrc/components/input.rs', <unnamed>:', :src/components/input.rs' panicked at '64src/components/input.rs64:attempt to add with overflow:::64', 136413:src/components/input.rs
+:
+13:13
+<unnamed>64
+attempt to add with overflow', src/components/input.rs:64:13
+:64:13
+attempt to add with overflow', src/components/input.rs:64:13
+' panicked at 'sending on a closed channel', src/components/neuron.rs:101:27
+attempt to add with overflow', src/components/input.rs:64:13
+attempt to add with overflow64', 
+:src/components/input.rs13:
+64', :src/components/input.rs13:
+64:13
+src/components/input.rs:', 64src/components/input.rs', ::src/components/input.rs13src/components/input.rs64:
+::646413::101
+132713:
+
+
+27
+
+', :src/components/neuron.rs64::10113
+:27
+64:13
+', src/components/input.rs:64:13
+attempt to add with overflow', src/components/input.rs:64:13
+', 13src/components/input.rs
+:64:13
+13
+src/components/input.rs:64:13
+:13
+:13
+
+:13', src/components/input.rs:64:13
+' panicked at 'sending on a closed channel27
+101' panicked at 'attempt to add with overflow:', 13
+src/components/input.rs', 
+error Any { .. } during join neural_netowork run() method
+:64src/components/neuron.rs::13101
+:27
+:27
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+error Any { .. } during join neural_netowork run() method
+		DONE.
