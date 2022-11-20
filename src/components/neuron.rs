@@ -14,7 +14,7 @@ pub struct Neuron {
     v_rest: f32,
     v_reset: f32,
     // LIR model function signature, maybe to be generalized
-    model: Arc<dyn Fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32 + Send + Sync + 'static>,
+    model: Arc<dyn Fn(i8, i8, f32, f32, f64, Vec<f32>) -> f32 + Send + Sync + 'static>,
     // last 'neuron fired' tension
     v_mem_old: f32,
     // last unit time at which the neuron fired
@@ -39,7 +39,7 @@ impl Neuron {
         v_rest: f32,
         v_reset: f32,
         tao: f64,
-        model: fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32,
+        model: fn(i8, i8, f32, f32, f64, Vec<f32>) -> f32,
         name: String,
     ) -> Self {
         Self {
@@ -57,7 +57,7 @@ impl Neuron {
             name,
         }
     }
-    fn read_spikes(&self) -> Result<Vec<i32>, RecvError> {
+    fn read_spikes(&self) -> Result<Vec<f32>, RecvError> {
         // legge gli impulsi provenienti dal layer precedente (sia neurale che di input)
 
         // vettore che contiene (w_i * s_i) dove s_i è 0 o 1 e w_i è il peso della connessione
@@ -67,7 +67,7 @@ impl Neuron {
         for syanpse in &self.synapses {
              
             // a ts = 0 (inizio della simulazione) nessun neurone scatta e quindi non deve aspettare sulle sinapsi inibitorie
-            if syanpse.get_weight() < 0 && self.ts == 0 {
+            if syanpse.get_weight() < 0.0 && self.ts == 0 {
                 continue;
             }
 
@@ -76,7 +76,7 @@ impl Neuron {
                 // wi: weighted input
                 Ok(wi) => {
                     // considera solo gli input != 0
-                    if wi != 0 {
+                    if wi != 0.0 {
                         weighted_inputs.push(wi)
                     }
                     
@@ -122,7 +122,7 @@ impl Neuron {
                     spike_received = false;
                 }
                 // true se esiste un input != 0 
-                Ok(weighted_inputs) => spike_received = weighted_inputs.iter().any(|&wi| wi != 0),
+                Ok(weighted_inputs) => spike_received = weighted_inputs.iter().any(|&wi| wi != 0.0),
             };
             let mut out_spike = 0;
 

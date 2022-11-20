@@ -1,7 +1,5 @@
 mod components;
 
-use libm::exp;
-use std::vec;
 
 use components::neural_network::NeuralNetwork;
 

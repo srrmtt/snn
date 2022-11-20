@@ -1,5 +1,9 @@
 use std::thread::{self, JoinHandle};
 
+use std::num::ParseIntError;
+use std::path::Path;
+use std::fs::File;
+use std::io::Read;
 use std::sync::mpsc::SyncSender;
 
 use super::input::Input;
@@ -23,6 +27,41 @@ impl InputLayer {
                 panic!("Call the connect_inputs method of the neural network class before running the simulation.")
             }
         }
+    }
+
+    pub fn from_file(path: &str, delimiter: char) -> Result<Self, Box<dyn std::error::Error>>{
+        // open file return an error if the file is not found
+        let mut file = match File::open(Path::new(&path)) {
+            Err(err) => return Err(Box::new(err)),
+            Ok(f) => f,
+        };
+
+        // read file content
+        let mut content = String::new();
+        // vector of Input structs
+        let mut inputs = vec![];
+        
+        match file.read_to_string(&mut content) {
+            Err(err) => return Err(Box::new(err)),
+            Ok(_) => {
+                let inputs_str = content.split(delimiter);
+                
+                for line in inputs_str{
+                    let parse_r : Result<Vec<i8>, ParseIntError>= line.as_bytes().into_iter().map(|spike| spike.to_string().parse::<i8>()).collect();
+                    match parse_r {
+                        Ok(spikes) => {
+                            if !spikes.is_empty() {
+                                inputs.push(Input::new(spikes))
+                            }
+                        },
+                        Err(err) => return  Err(Box::new(err)),
+                    }
+                }
+                
+                
+            }
+        }
+        return Ok(Self { inputs })
     }
 
     //TODO change the return in a Result for handling the reading file error
