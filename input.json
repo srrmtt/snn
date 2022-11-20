@@ -1,5 +1,5 @@
 {
-  "v_threshold" : "thresholds.txt",
+  "v_threshold" : 1,
   "v_rest" : 0.6,
   "v_reset" : 0.4,
   "tao" : 0.04,

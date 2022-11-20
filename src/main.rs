@@ -11,11 +11,11 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 struct Value {
-    v_threshold: String,
-    v_rest: f32,
-    v_reset: f32,
-    tao: f64,
-    weights: String
+    thresholds: Vec<Vec<f32>>,
+    rest_potential: f32,
+    reset_potential: f32,
+    tau: f64,
+    intra_layer_weights: Vec<Vec<Vec<f32>>>
     }
 
 fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<i32>) -> f32 {
@@ -31,9 +31,8 @@ fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<i32
 
 fn main() {
     let file = File::open("weights.txt");
-    let the_file = File::open("input.json").unwrap();
+    let the_file = File::open("test.json").unwrap();
     let input: Value = serde_json::from_reader(the_file).expect("JSON was not well-formatted");
-
     let output_file = "out.txt";
 
     let mut nn = NeuralNetwork::new(input.v_threshold, input.v_rest, input.v_reset, input.tao, lif, &[2,2]);
@@ -58,6 +57,4 @@ fn main() {
     //println!("internal connection: done");
     nn.connect_output(om);
     nn.run();
-    // TODO: scrivere il neruone come thread e farlo comunicare con gli input reader, temporizzare l'emissione di un
-    // input con l'output
 }
