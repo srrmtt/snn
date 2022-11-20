@@ -47,7 +47,7 @@ impl InputLayer {
                 let inputs_str = content.split(delimiter);
                 
                 for line in inputs_str{
-                    let parse_r : Result<Vec<i8>, ParseIntError>= line.as_bytes().into_iter().map(|spike| spike.to_string().parse::<i8>()).collect();
+                    let parse_r : Result<Vec<i8>, ParseIntError>= line.chars().map(|spike| spike.to_string().parse::<i8>()).collect();
                     match parse_r {
                         Ok(spikes) => {
                             if !spikes.is_empty() {

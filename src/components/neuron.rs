@@ -84,7 +84,7 @@ impl Neuron {
                 Err(e) => return Err(e),
             }
         }
-        println!("[Neuron {}] --- {:?} read at [{}]",&self.name, weighted_inputs, self.ts);
+        // println!("[Neuron {}] --- {:?} read at [{}]",&self.name, weighted_inputs, self.ts);
         return Ok(weighted_inputs);
     }
 
@@ -97,7 +97,7 @@ impl Neuron {
             let r = out.send(spike);
             // TODO vedere se c'è un modo di gestire solo il ramo Err, l'Ok non dovrebbe fare nulla  
             match r {
-                Ok(_) => println!("\t\t--> OK"),
+                Ok(_) => {},
                 Err(e) => panic!("{}", e)
             }
         }

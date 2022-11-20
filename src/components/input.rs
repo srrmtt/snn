@@ -41,7 +41,8 @@ impl Input {
     pub fn emit(&self, spike: i8) {
         // emette una spike sul SynchSender
         // TODO return a Result instead of panicking
-        println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
+        
+        //println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
 
         for input in &self.senders {
             // TODO handle SendError

@@ -13,6 +13,7 @@ pub struct OutputMonitor {
     // TODO sostituire i8 con la classe Spike da creare, in questo modo possiamo conoscere il  
     // neurone di provenienza e ordinare gli output
     outputs: Vec<i8>,
+    ts: i8,
 }
 
 impl OutputMonitor {
@@ -22,6 +23,7 @@ impl OutputMonitor {
             receivers: vec![],
             outputs: vec![],
             filename: filename.to_string(),
+            ts: 0
         }
     }
 
@@ -49,13 +51,16 @@ impl OutputMonitor {
         Ok(outs)
     }
 
-    pub fn run(self) -> JoinHandle<()> {
+    pub fn run(mut self) -> JoinHandle<()> {
         // lancia un thread e restituisce un Join Handle, cambiare il return in Result e sostituire il break con un return di RecvError
         thread::spawn(move || {
             loop {
                 let res = self.receive();
                 match res {
-                    Ok(outs) => println!("\t Output Monitor: {:?}", outs),
+                    Ok(outs) => {
+                        println!("\t Output Monitor: {} at [{}]", outs.into_iter().sum::<i8>(), self.ts);
+                        self.ts+=1;
+                    },
                     Err(e) => break,
                 }
             }
