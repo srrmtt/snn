@@ -80,7 +80,12 @@ impl NeuralNetwork {
         let file = File::open(path).unwrap();
         let input: Value = serde_json::from_reader(file).expect("JSON was not well-formatted");
         let mut nn = NeuralNetwork::new(input.rest_potential, input.reset_potential, input.tau, lif, input.thresholds);
-        
+        for i in 0..nn.neural_layers.len() {
+            nn.connect(i,i,input.intra_layer_weights[i]);
+        }
+        for i in 0..nn.neural_layers.len()-1 {
+            nn.connect(i,i+1,weight); //Non sono in questo branch
+        }
         return nn;   
     }   
 
