@@ -1,10 +1,34 @@
-use std::fs::{self, File};
-use std::io::BufReader;
-use std::{vec, error::Error};
+use std::vec;
 
 use std::sync::mpsc::sync_channel;
-use serde_json::{json, Value};
+
+use libm::exp;
+use std::fs::File;
+use serde::Deserialize;
+
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
+
+fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<f32>) -> f32 {
+    let k = -(ts - ts_1) as f64 / tao;
+
+    let exponential = exp(k) as f32;
+
+    let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
+
+    let weight = weights.iter().fold(0.0, |sum, x| sum + x) as f32;
+    return v_mem + weight;
+}
+
+#[derive(Debug, Deserialize)]
+struct Value {
+    thresholds: Vec<Vec<f32>>,
+    rest_potential: f32,
+    reset_potential: f32,
+    tau: f64,
+    intra_layer_weights: Vec<Vec<Vec<f32>>>,
+    input_weights: Vec<Vec<Vec<f32>>>,
+    inputs: String,
+    }
 
 /*
 Classe contenitore dei vari layer, attraverso i vari metodi connect si possono aggiungere le varie componenti e collegarle tra loro.
@@ -19,30 +43,31 @@ pub struct NeuralNetwork {
 impl NeuralNetwork {
     pub fn new(
         // costruttore
-        v_threshold: f32,
         v_rest: f32,
         v_reset: f32,
         tao: f64,
-        // prendere spunto dal progetto degli altri, magari si può fare meglio
-        model: fn(i8, i8, f32, f32, f64, Vec<i32>) -> f32,
-        npl: &[i8],
+        model: fn(i8, i8, f32, f32, f64, Vec<f32>) -> f32,
+        thresholds: Vec<Vec<f32>>,
     ) -> Self {
         let mut layers = vec![];
-        // npl parameter is 'neuoron per layer' the len of the array is the number of layers and the elements are the number of neurons for each one
-        for (n_layer, n_neurons) in npl.iter().enumerate() {
-            let mut nl = NeuralLayer::new(*n_neurons as usize);
-            for i in 0..*n_neurons {
+        let mut n_layer: i32 = 0;
+        for layer in thresholds {
+            let mut nl = NeuralLayer::new(layer.len() as usize);
+            let mut n_neuron: i32 = 0;
+            for threshold in layer {
                 nl.add_neuron(Neuron::new(
-                    v_threshold,
+                    threshold,
                     v_rest,
                     v_reset,
                     tao,
                     model,
-                    format!("l{}n{}", n_layer.to_string(), i.to_string()),
-                ))
+                    format!("l{}n{}", n_layer.to_string(), n_neuron.to_string()),
+                ));
+                n_neuron+=1;
             }
             layers.push(nl);
-        }
+            n_layer+=1;
+        } 
 
         Self {
             input_layer: None,
@@ -50,27 +75,23 @@ impl NeuralNetwork {
             output_monitor: None,
         }
     }
-    pub fn from_JSON(path: &str) -> Result<(), Box<&dyn Error>>{
-        // read file content
+
+
+    pub fn from_JSON(path: &str)->NeuralNetwork{
         let file = File::open(path).unwrap();
-        let reader = BufReader::new(file);
+        let parameters: Value = serde_json::from_reader(file).expect("JSON was not well-formatted");
+        let mut nn = NeuralNetwork::new(parameters.rest_potential, parameters.reset_potential, parameters.tau, lif, parameters.thresholds);        
+        for i in 0..nn.neural_layers.len() {
+            nn.connect(i,i,parameters.intra_layer_weights[i].clone());
+        }
+        for i in 0..nn.neural_layers.len()-1 {
+            nn.connect(i,i+1,parameters.input_weights[i+1].clone());
+        }
 
-        let json : Value = serde_json::from_reader(reader).unwrap();
-         
-        print!("{}", json["thresholds"]);
+        nn.connect_inputs(&parameters.inputs,parameters.input_weights[0].clone());
+        return nn;   
+    }   
 
-        // chiamare la new di Neural network 
-
-        // iterare sui weight e chiamare la connect per le connessioni interlayer
-
-        // iterare sugli internal weight e chiamare la connect per le connessioni intralayer
-        
-        // return Ok(nn) cambiare la firma del metodo
-        Ok(())
-
-    } 
-
-        
     pub fn run(self) {
         // lancia la simulazione di tutta la rete neurale, wrapper di tutti i metodi di run 
         
@@ -118,7 +139,7 @@ impl NeuralNetwork {
         tid_output.join();
     }
 
-    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<Option<i32>>>) {
+    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f32>>) {
         /*
          * Questo metodo connette il layer from con il layer to, se i valori coincidono significa che si stanno collegando neuroni dello stesso layer
          * e quindi si stano creando sinapsi inibitorie. In generale si utilizza una matrice di pesi in il primo indice indica il neurone del layer a
@@ -142,20 +163,17 @@ impl NeuralNetwork {
             // for each neuron connected to the sender add the receiver end
             for (j, weight) in row.iter().enumerate() {
                 let (tx, rx) = sync_channel(capacity);
-                match *weight {
-                    None => continue,
-                    Some(w) => {
+                if *weight != 0.0 {
                         println!("---[layer {} - {}] connecting neuron {} with neuron {}",to, from, i, j);
-                        self.neural_layers[to].add_synapse(j, w, rx);
+                        self.neural_layers[to].add_synapse(j, *weight, rx);
                         // add the sender (tx) part of the channel to the 'to' layer
                         self.neural_layers[from].add_sender(i, tx);
                     }
-                }
             }
         }
     }
 
-    pub fn connect_inputs(&mut self, filenames: &[&str], weights: Vec<Vec<i32>>) {
+    pub fn connect_inputs(&mut self, filename: &str, weights: Vec<Vec<f32>>) {
         /*
          * Connette il layer di input con il primo layer (in posizione 0) della rete neurale. Questo metodo fallisce se non sono ancora stati
          * aggiunti dei layer alla rete oppure se ci sono problemi con la lettura del file.
@@ -163,17 +181,19 @@ impl NeuralNetwork {
         if (&self.neural_layers).len() == 0 {
             panic!("Cannot link input with first layer, the layer does not exist.")
         }
+        
         // crea il layer di input a partire dai file specificati
-        self.input_layer = Some(InputLayer::from_files(filenames));
-
+        //  self.input_layer = Some(InputLayer::from_files(filenames));
+        self.input_layer = Some(InputLayer::from_file(filename,'\n').unwrap());
         // per ogni file
+        
         for (i, row) in weights.iter().enumerate() {
             // sender: lato input layer
             // receiver: lato neuron layer
             for (j, weight) in row.iter().enumerate() {
                 let (tx, rx) = sync_channel(0);
-                self.input_layer.as_mut().unwrap().add_sender_to(i, tx);
-                self.neural_layers[0].add_synapse(j, *weight, rx);
+                self.input_layer.as_mut().unwrap().add_sender_to(j, tx);
+                self.neural_layers[0].add_synapse(i, *weight, rx);
             }
         }
     }

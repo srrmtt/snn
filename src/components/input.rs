@@ -70,8 +70,4 @@ impl Input {
     pub fn add_sender(&mut self, tx: SyncSender<i8>) {
         self.senders.push(tx);
     }
-
-    pub fn to_string(&self) -> String {
-        format!("input made of [{}] spikes", self.spikes.len())
-    }
 }

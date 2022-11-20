@@ -1,6 +1,6 @@
 use std::{
     sync::{Arc, Barrier},
-    thread::{self, JoinHandle}, error::Error,
+    thread::{self, JoinHandle},
 };
 
 use std::sync::mpsc::{Receiver, SyncSender};
@@ -26,7 +26,6 @@ impl NeuralLayer {
         }
     }
 
-    
     pub fn add_neuron(&mut self, neuron: Neuron) {
         // aggiunge un neurone al layer
         self.neurons.push(neuron);
@@ -50,7 +49,7 @@ impl NeuralLayer {
         return tids;
     }
 
-    pub fn add_synapse(&mut self, neuron: usize, weight: i32, channel: Receiver<i8>) {
+    pub fn add_synapse(&mut self, neuron: usize, weight: f32, channel: Receiver<i8>) {
         // aggiunge una sinapsi ricevendo peso e receiver a un neurone, return di result se neuron è out of bounds
         let s = Synapse::new(weight, channel);
         println!("adding synapses to neuron [{}]", &neuron);
