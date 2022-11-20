@@ -1,7 +1,9 @@
-use std::vec;
+use std::fs::{self, File};
+use std::io::BufReader;
+use std::{vec, error::Error};
 
 use std::sync::mpsc::sync_channel;
-
+use serde_json::{json, Value};
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
 
 /*
@@ -48,7 +50,27 @@ impl NeuralNetwork {
             output_monitor: None,
         }
     }
+    pub fn from_JSON(path: &str) -> Result<(), Box<&dyn Error>>{
+        // read file content
+        let file = File::open(path).unwrap();
+        let reader = BufReader::new(file);
 
+        let json : Value = serde_json::from_reader(reader).unwrap();
+         
+        print!("{}", json["thresholds"]);
+
+        // chiamare la new di Neural network 
+
+        // iterare sui weight e chiamare la connect per le connessioni interlayer
+
+        // iterare sugli internal weight e chiamare la connect per le connessioni intralayer
+        
+        // return Ok(nn) cambiare la firma del metodo
+        Ok(())
+
+    } 
+
+        
     pub fn run(self) {
         // lancia la simulazione di tutta la rete neurale, wrapper di tutti i metodi di run 
         

@@ -53,7 +53,8 @@ fn main() {
     nn.run();
     // TODO: scrivere il neruone come thread e farlo comunicare con gli input reader, temporizzare l'emissione di un
     // input con l'output
-
+    println!("--- Test neural network from file ---");
+    NeuralNetwork::from_JSON("./data/test.json");
     println!("--- Test input layer from file ---");
     let il_res = InputLayer::from_file("./data/inputSpikes.txt", '\n');
     match il_res {

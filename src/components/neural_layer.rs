@@ -1,6 +1,6 @@
 use std::{
     sync::{Arc, Barrier},
-    thread::{self, JoinHandle},
+    thread::{self, JoinHandle}, error::Error,
 };
 
 use std::sync::mpsc::{Receiver, SyncSender};
@@ -26,6 +26,7 @@ impl NeuralLayer {
         }
     }
 
+    
     pub fn add_neuron(&mut self, neuron: Neuron) {
         // aggiunge un neurone al layer
         self.neurons.push(neuron);
