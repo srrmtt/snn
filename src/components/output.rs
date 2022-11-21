@@ -13,7 +13,7 @@ pub struct OutputMonitor {
     // TODO sostituire i8 con la classe Spike da creare, in questo modo possiamo conoscere il  
     // neurone di provenienza e ordinare gli output
     outputs: Vec<i8>,
-    ts: i8,
+    ts: i32,
 }
 
 impl OutputMonitor {

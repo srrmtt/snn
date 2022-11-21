@@ -8,25 +8,25 @@ use serde::Deserialize;
 
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
 
-fn lif(ts: i8, ts_1: i8, v_rest: f32, v_mem_old: f32, tao: f64, weights: Vec<f32>) -> f32 {
-    let k = -(ts - ts_1) as f64 / tao;
+fn lif(ts: i32, ts_1: i32, v_rest: f64, v_mem_old: f64, tao: f64, weights: Vec<f64>) -> f64 {
+    let k = -((ts - ts_1) as f64 / tao);
 
-    let exponential = std::f64::consts::E.powf(k) as f32;
+    let exponential = std::f64::consts::E.powf(k);
 
     let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
 
-    let weight = weights.iter().fold(0.0, |sum, x| sum + x) as f32;
+    let weight = weights.iter().sum::<f64>();
     return v_mem + weight;
 }
 
 #[derive(Debug, Deserialize)]
 struct Value {
-    thresholds: Vec<Vec<f32>>,
-    rest_potential: f32,
-    reset_potential: f32,
+    thresholds: Vec<Vec<f64>>,
+    rest_potential: f64,
+    reset_potential: f64,
     tau: f64,
-    intra_layer_weights: Vec<Vec<Vec<f32>>>,
-    input_weights: Vec<Vec<Vec<f32>>>,
+    intra_layer_weights: Vec<Vec<Vec<f64>>>,
+    input_weights: Vec<Vec<Vec<f64>>>,
     inputs: String,
     }
 
@@ -43,11 +43,11 @@ pub struct NeuralNetwork {
 impl NeuralNetwork {
     pub fn new(
         // costruttore
-        v_rest: f32,
-        v_reset: f32,
+        v_rest: f64,
+        v_reset: f64,
         tao: f64,
-        model: fn(i8, i8, f32, f32, f64, Vec<f32>) -> f32,
-        thresholds: Vec<Vec<f32>>,
+        model: fn(i32, i32, f64, f64, f64, Vec<f64>) -> f64,
+        thresholds: Vec<Vec<f64>>,
     ) -> Self {
         let mut layers = vec![];
         let mut n_layer: i32 = 0;
@@ -139,7 +139,7 @@ impl NeuralNetwork {
         tid_output.join();
     }
 
-    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f32>>) {
+    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f64>>) {
         /*
          * Questo metodo connette il layer from con il layer to, se i valori coincidono significa che si stanno collegando neuroni dello stesso layer
          * e quindi si stano creando sinapsi inibitorie. In generale si utilizza una matrice di pesi in il primo indice indica il neurone del layer a
@@ -173,7 +173,7 @@ impl NeuralNetwork {
         }
     }
 
-    pub fn connect_inputs(&mut self, filename: &str, weights: Vec<Vec<f32>>) {
+    pub fn connect_inputs(&mut self, filename: &str, weights: Vec<Vec<f64>>) {
         /*
          * Connette il layer di input con il primo layer (in posizione 0) della rete neurale. Questo metodo fallisce se non sono ancora stati
          * aggiunti dei layer alla rete oppure se ci sono problemi con la lettura del file.

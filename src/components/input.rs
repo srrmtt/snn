@@ -9,7 +9,7 @@ pub struct Input {
     spikes: Vec<i8>,
     senders: Vec<SyncSender<i8>>,
     // used just for debugging 
-    ts: i8,
+    ts: i32,
 }
 
 impl Input {

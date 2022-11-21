@@ -1,0 +1,6 @@
+{
+    "tau": 1000,
+    "rest_potential": -65,
+    "reset_potential": -60,
+    "thresholds": []
+}
