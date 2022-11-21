@@ -43,7 +43,9 @@ impl Input {
         // TODO return a Result instead of panicking
         
         //println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
-
+        if spike == 1 {
+            println!("emitting 1 at [{}]", self.ts);
+        }
         for input in &self.senders {
             // TODO handle SendError
             let r = input.send(spike);
@@ -55,11 +57,10 @@ impl Input {
     }
     pub fn run(mut self) {
         // logic of the whole input emit spike until the input vector is empty
-        while !self.spikes.is_empty() {
-            // WRONG! pop() emit spike in the inverse order 
-            let spike = self.spikes.pop().unwrap();
+        for spike in &self.spikes {
+            
             // handle the return result
-            self.emit(spike);
+            self.emit(*spike);
             // just for debug
             self.ts += 1;
         }

@@ -122,7 +122,7 @@ impl Neuron {
                     spike_received = false;
                 }
                 // true se esiste un input != 0 
-                Ok(weighted_inputs) => spike_received = weighted_inputs.iter().any(|&wi| wi != 0.0),
+                Ok(weighted_inputs) => spike_received = !weighted_inputs.is_empty(),
             };
             let mut out_spike = 0;
             // 0100001000
@@ -141,16 +141,16 @@ impl Neuron {
                     // è possibile fare unwrap() perchè altrimenti l'if sarebbe false
                     res_weighted_inputs.unwrap(),
                 );
-                
-                //println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
+                self.ts_1 = self.ts;
+                self.v_mem_old = out;
+                println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
                 if out > self.v_threshold {
                     // se il modello fornisce un valore maggiore della soglia, resetta la tensione di membrana e assegna 1 all'out_spike
                     // e aggiorna ts_1 a ts
                     out_spike = 1;
                     self.v_mem_old = self.v_reset;
                 } 
-                self.ts_1 = self.ts;
-                self.v_mem_old = out;
+                
                 //println!("{} out at {} : {}", self.to_string(), &self.ts, out_spike);   
             }
             // invia la spike a tutti i neuroni di output o al monitor
