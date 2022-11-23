@@ -143,7 +143,7 @@ impl Neuron {
                 );
                 self.ts_1 = self.ts;
                 self.v_mem_old = out;
-                println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
+                // println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
                 if out > self.v_threshold {
                     // se il modello fornisce un valore maggiore della soglia, resetta la tensione di membrana e assegna 1 all'out_spike
                     // e aggiorna ts_1 a ts

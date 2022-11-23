@@ -5,6 +5,7 @@ use std::sync::mpsc::sync_channel;
 use libm::exp;
 use std::fs::File;
 use serde::Deserialize;
+use std::io::Write;
 
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor, spike::Spike};
 
@@ -241,8 +242,12 @@ impl NeuralNetwork {
 
 }
 
-pub fn print(result: Vec<i32>,output_file: &str) {
+pub fn print(result: Vec<i32>,path: &str) {
     for i in &result {
         println!("{}", i);
+    }
+    let mut output_file = File::create(path).unwrap();
+    for o in result {
+        write!(output_file, "{}\n", o.to_string()).expect("Unable to write output length");
     }
 }

@@ -67,6 +67,7 @@ impl OutputMonitor {
                 match res {
                     Ok(outs) => {
                         //   println!("\t Output Monitor: {} at [{}]", outs.into_iter().sum::<i8>(), self.ts);
+                        println!("{}",self.ts);
                         self.ts += 1;
                     }
                     Err(e) => break
