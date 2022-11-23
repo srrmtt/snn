@@ -2,7 +2,7 @@ use std::sync::{Arc, Barrier};
 
 use std::sync::mpsc::{RecvError, SyncSender};
 
-use super::synapse::Synapse;
+use super::{synapse::Synapse, spike::Spike};
 /*
 Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i SyncSender
 con capacità 0 (canali rendez-vous) in modo da non utilizzare altre memory barrier per sincronizzare input e output con il primo
@@ -25,11 +25,11 @@ pub struct Neuron {
     // channels' ends with associated weight 
     pub synapses: Vec<Synapse>,
     // neuron output
-    pub output: Vec<SyncSender<i8>>,
+    pub output: Vec<SyncSender<Spike>>,
 
     tao: f64,
     // formato: l#n#, dove il primo # indica il numero del layer, mentre il secondo indica il numero del neurone all'interno del layer
-    name: String,
+    name: i32,
 }
 
 impl Neuron {
@@ -40,7 +40,7 @@ impl Neuron {
         v_reset: f64,
         tao: f64,
         model: fn(i32, i32, f64, f64, f64, Vec<f64>) -> f64,
-        name: String,
+        name: i32,
     ) -> Self {
         Self {
             v_threshold,
@@ -88,7 +88,7 @@ impl Neuron {
         return Ok(weighted_inputs);
     }
 
-    pub fn emit_spikes(&self, spike : i8){
+    pub fn emit_spikes(&self, spike : Spike){
         // invia 0 o 1 ai neuroni successivi
 
         // per ogni connessione in uscita 
@@ -155,7 +155,7 @@ impl Neuron {
             }
             // invia la spike a tutti i neuroni di output o al monitor
             // TODO: sarebbe meglio dare un return come Result 
-            self.emit_spikes(out_spike);
+            self.emit_spikes(Spike::new(out_spike, Some(self.name)));
             
             
             // attendi che gli altri thread facciano output prima di leggere gli input 

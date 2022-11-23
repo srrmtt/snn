@@ -8,6 +8,7 @@ use std::sync::mpsc::SyncSender;
 use std::vec;
 
 use super::input::Input;
+use super::spike::Spike;
 
 /*
 Conenitore di oggetti Input
@@ -81,7 +82,7 @@ impl InputLayer {
         Self { inputs }
     }
 
-    pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<i8>) {
+    pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<Spike>) {
         // add a sender to the n_input-th input object 
         // TODO return a result<Ok<()>,Error> for out of bounds error  
         // println!("adding sender to input [{}]", &n_input);

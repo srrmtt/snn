@@ -9,7 +9,7 @@ fn main() {
     let output_file = "out.txt"; 
     println!("-------------------- START -------------------");
     println!("--- Creating neural network from test.json...");
-    let mut nn=NeuralNetwork::from_JSON("test.json");
+    let mut nn=NeuralNetwork::from_JSON("./data/simple_test.json");
     println!("\t\tDONE.");
    /* let input_w = vec![vec![10, 1], vec![5, 1]];
 
@@ -24,10 +24,7 @@ fn main() {
     nn.connect(0, 1, vec![vec![None, Some(-1)], vec![Some(-2), None]]);
   */
     //println!("internal connection: done");
-    let om = OutputMonitor::new(output_file);
-
-    nn.connect_output(om);
     println!("--- Starting simulation...");
-    nn.run(); 
+    nn.run("output_file.txt"); 
     println!("\t\tDONE.")
 }

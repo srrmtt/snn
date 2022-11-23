@@ -2,12 +2,14 @@ use std::{fs::File, io::BufReader, io::Read, vec};
 
 use std::sync::mpsc::SyncSender;
 
+use super::spike::Spike;
+
 /*
 The input class contiains the logic to emit single spike to the first neural layer.
 */
 pub struct Input {
     spikes: Vec<i8>,
-    senders: Vec<SyncSender<i8>>,
+    senders: Vec<SyncSender<Spike>>,
     // used just for debugging 
     ts: i32,
 }
@@ -38,14 +40,11 @@ impl Input {
 
         Ok(Input::new(ret))
     }
-    pub fn emit(&self, spike: i8) {
+    pub fn emit(&self, spike: Spike) {
         // emette una spike sul SynchSender
         // TODO return a Result instead of panicking
         
         //println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
-        if spike == 1 {
-            println!("emitting 1 at [{}]", self.ts);
-        }
         for input in &self.senders {
             // TODO handle SendError
             let r = input.send(spike);
@@ -60,7 +59,7 @@ impl Input {
         for spike in &self.spikes {
             
             // handle the return result
-            self.emit(*spike);
+            self.emit(Spike::new(*spike, None));
             // just for debug
             self.ts += 1;
         }
@@ -69,7 +68,7 @@ impl Input {
         return self.senders.is_empty();
     }
 
-    pub fn add_sender(&mut self, tx: SyncSender<i8>) {
+    pub fn add_sender(&mut self, tx: SyncSender<Spike>) {
         self.senders.push(tx);
     }
 }

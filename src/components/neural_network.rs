@@ -6,7 +6,7 @@ use libm::exp;
 use std::fs::File;
 use serde::Deserialize;
 
-use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
+use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor, spike::Spike};
 
 fn lif(ts: i32, ts_1: i32, v_rest: f64, v_mem_old: f64, tao: f64, weights: Vec<f64>) -> f64 {
     let k = -((ts - ts_1) as f64 / tao);
@@ -61,7 +61,7 @@ impl NeuralNetwork {
                     v_reset,
                     tao,
                     model,
-                    format!("l{}n{}", n_layer.to_string(), n_neuron.to_string()),
+                    n_neuron
                 ));
                 n_neuron+=1;
             }
@@ -80,6 +80,7 @@ impl NeuralNetwork {
     pub fn from_JSON(path: &str)->NeuralNetwork{
         let file = File::open(path).unwrap();
         let parameters: Value = serde_json::from_reader(file).expect("JSON was not well-formatted");
+        let last_layer_len = parameters.thresholds.last().unwrap().len();
         let mut nn = NeuralNetwork::new(parameters.rest_potential, parameters.reset_potential, parameters.tau, lif, parameters.thresholds);        
         for i in 0..nn.neural_layers.len() {
             nn.connect(i,i,parameters.intra_layer_weights[i].clone());
@@ -89,10 +90,14 @@ impl NeuralNetwork {
         }
 
         nn.connect_inputs(&parameters.inputs,parameters.input_weights[0].clone());
+
+        let om = OutputMonitor::new(last_layer_len);
+
+        nn.connect_output(om);
         return nn;   
     }   
 
-    pub fn run(self) {
+    pub fn run(self,output_file: &str) {
         // lancia la simulazione di tutta la rete neurale, wrapper di tutti i metodi di run 
         
         // avvia tutti gli input layer e colleziona gli handler per fare join in caso di successo, None altrimenti (cambiare Option in Result)
@@ -136,7 +141,11 @@ impl NeuralNetwork {
             }
         }
         // TODO: handle join 
-        tid_output.join();
+        let result = tid_output.join();
+        match result {
+            Ok(counted_output) => print(counted_output,output_file),
+            Err(e) => panic!("{:?}",e)
+        };
     }
 
     pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f64>>) {
@@ -191,7 +200,7 @@ impl NeuralNetwork {
             // sender: lato input layer
             // receiver: lato neuron layer
             for (j, weight) in row.iter().enumerate() {
-                let (tx, rx) = sync_channel(0);
+                let (tx, rx) = sync_channel::<Spike>(0);
                 self.input_layer.as_mut().unwrap().add_sender_to(j, tx);
                 self.neural_layers[0].add_synapse(i, *weight, rx);
             }
@@ -212,7 +221,7 @@ impl NeuralNetwork {
         
         for neuron in self.neural_layers[last_layer].neurons.iter_mut(){
             // assegna ad ogni neurone l'estremità di sender e aggiunge all'output monitor i receiver
-            let (tx, rx) = sync_channel::<i8>(0);    
+            let (tx, rx) = sync_channel::<Spike>(0);    
             neuron.output.push(tx.clone());
             output_monitor.add_receiver(rx);
         }
@@ -227,5 +236,13 @@ impl NeuralNetwork {
             self.input_layer.as_ref().unwrap().to_string(),
             self.neural_layers.len()
         )
+    }
+
+
+}
+
+pub fn print(result: Vec<i32>,output_file: &str) {
+    for i in &result {
+        println!("{}", i);
     }
 }
