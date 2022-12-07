@@ -5,9 +5,9 @@ use std::sync::mpsc::sync_channel;
 use libm::exp;
 use std::fs::File;
 use serde::Deserialize;
-use std::io::Write;
 
-use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor, spike::Spike};
+use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor};
+use super::errors::Error;
 
 fn lif(ts: i32, ts_1: i32, v_rest: f64, v_mem_old: f64, tao: f64, weights: Vec<f64>) -> f64 {
     let k = -((ts - ts_1) as f64 / tao);
@@ -62,7 +62,7 @@ impl NeuralNetwork {
                     v_reset,
                     tao,
                     model,
-                    n_neuron
+                    format!("l{}n{}", n_layer.to_string(), n_neuron.to_string()),
                 ));
                 n_neuron+=1;
             }
@@ -78,38 +78,44 @@ impl NeuralNetwork {
     }
 
 
-    pub fn from_JSON(path: &str)->NeuralNetwork{
+    pub fn from_JSON(path: &str)->Result<NeuralNetwork, Error>{
         let file = File::open(path).unwrap();
         let parameters: Value = serde_json::from_reader(file).expect("JSON was not well-formatted");
-        let last_layer_len = parameters.thresholds.last().unwrap().len();
         let mut nn = NeuralNetwork::new(parameters.rest_potential, parameters.reset_potential, parameters.tau, lif, parameters.thresholds);        
+        
         for i in 0..nn.neural_layers.len() {
-            nn.connect(i,i,parameters.intra_layer_weights[i].clone());
+            match nn.connect(i,i,parameters.intra_layer_weights[i].clone()){
+                Err(error) => return Err(error),
+                Ok(_)=>{}
+            }
         }
         for i in 0..nn.neural_layers.len()-1 {
-            nn.connect(i,i+1,parameters.input_weights[i+1].clone());
+            match nn.connect(i,i+1,parameters.input_weights[i+1].clone()){
+                Err(error) => return Err(error),
+                Ok(_)=>{}
+            }
         }
 
-        nn.connect_inputs(&parameters.inputs,parameters.input_weights[0].clone());
-
-        let om = OutputMonitor::new(last_layer_len);
-
-        nn.connect_output(om);
-        return nn;   
+        match nn.connect_inputs(&parameters.inputs,parameters.input_weights[0].clone()){
+            Err(error) => return Err(error),
+            Ok(_)=>{}
+        }
+        return Ok(nn);   
     }   
 
-    pub fn run(self,output_file: &str) {
+    pub fn run(self) -> Result<(), Error> {
+
         // lancia la simulazione di tutta la rete neurale, wrapper di tutti i metodi di run 
         
         // avvia tutti gli input layer e colleziona gli handler per fare join in caso di successo, None altrimenti (cambiare Option in Result)
         let tid_input = match self.input_layer {
-            None => panic!("Use connect inputs - Input layer not connected"),
+            None => return Err(Error::InconnectedInput),
             Some(il) => il.emit_spikes(),
         };
         
         // lancia il metodo che riceve le spike di output dell'ultimo layer, panic se non è connesso ( cambiare option in Result ) 
         let tid_output = match self.output_monitor {
-            None => panic!("Use connect output - Output monitor not connected"),
+            None => return Err(Error::InconnectedOutput),
             Some(om) => om.run(),
         };
         
@@ -118,38 +124,45 @@ impl NeuralNetwork {
         for l in self.neural_layers {
             v.push(l.run_neurons());
         }
-
-
         
-        let mut i = 0;
-        // join dei vari thread
-        for tid in tid_input {
-            let r = tid.join();
-            match r {
-                Ok(_) => println!("\t\t- input thread[{}]: OK", i),
-                Err(e) => println!("error {:?} during join neural_netowork run() method", e),
-            }
-            i += 1;
-        }
 
-        for tids in v {
-            for tid in tids {
-                let r = tid.join();
-                match r {
-                    Ok(_) => println!("\t\t- neuron thread: OK"),
-                    Err(e) => println!("error {:?} during join neural_netowork run() method", e),
+        match tid_input{
+            Err(error) => return Err(error),
+            Ok(_) => {
+                let mut i = 0;
+                // join dei vari thread
+                for tid in tid_input.unwrap() {
+                    let r = tid.join();
+                    match r {
+                        Ok(_) => println!("\t\t- input thread[{}]: OK", i),
+                        Err(e) => println!("error {:?} during join neural_netowork run() method", e),
+                    }
+                    i += 1;
+                }
+
+                for tids in v {
+                    for tid in tids {
+                        let r = tid.join();
+                        match r {
+                            Ok(_) => println!("\t\t- neuron thread: OK"),
+                            Err(e) => println!("error {:?} during join neural_netowork run() method", e),
+                        }
+                    }
+                }
+                // TODO: handle join 
+                match tid_output.join(){
+                    Ok(_)=>{},
+                    Err(_error) => return Err(Error::JoinError) 
                 }
             }
         }
-        // TODO: handle join 
-        let result = tid_output.join();
-        match result {
-            Ok(counted_output) => print(counted_output,output_file),
-            Err(e) => panic!("{:?}",e)
-        };
+
+        
+        
+        Ok(())
     }
 
-    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f64>>) {
+    pub fn connect(&mut self, from: usize, to: usize, weights: Vec<Vec<f64>>) -> Result<(),Error> {
         /*
          * Questo metodo connette il layer from con il layer to, se i valori coincidono significa che si stanno collegando neuroni dello stesso layer
          * e quindi si stano creando sinapsi inibitorie. In generale si utilizza una matrice di pesi in il primo indice indica il neurone del layer a
@@ -159,10 +172,8 @@ impl NeuralNetwork {
         let n_layers = self.neural_layers.len();
         // check if the two parameters are conform with the net's dimension
         if from >= n_layers || to >= n_layers {
-            panic!(
-                "Cannot link the layer {} with the {} one, the net has only {} layers",
-                from, to, n_layers
-            );
+           // panic!("Cannot link the layer {} with the {} one, the net has only {} layers", from, to, n_layers);
+            return Err(Error::OutOfIndexLayer);
         }
         //TODO  check the weights dimension
         let mut capacity = 0;
@@ -181,15 +192,18 @@ impl NeuralNetwork {
                     }
             }
         }
+
+        Ok(())
     }
 
-    pub fn connect_inputs(&mut self, filename: &str, weights: Vec<Vec<f64>>) {
+    pub fn connect_inputs(&mut self, filename: &str, weights: Vec<Vec<f64>>) -> Result<(),Error>{
         /*
          * Connette il layer di input con il primo layer (in posizione 0) della rete neurale. Questo metodo fallisce se non sono ancora stati
          * aggiunti dei layer alla rete oppure se ci sono problemi con la lettura del file.
          */
         if (&self.neural_layers).len() == 0 {
-            panic!("Cannot link input with first layer, the layer does not exist.")
+            //panic!("Cannot link input with first layer, the layer does not exist.")
+            return Err(Error::NoLayerInNN);
         }
         
         // crea il layer di input a partire dai file specificati
@@ -201,20 +215,22 @@ impl NeuralNetwork {
             // sender: lato input layer
             // receiver: lato neuron layer
             for (j, weight) in row.iter().enumerate() {
-                let (tx, rx) = sync_channel::<Spike>(0);
+                let (tx, rx) = sync_channel(0);
                 self.input_layer.as_mut().unwrap().add_sender_to(j, tx);
                 self.neural_layers[0].add_synapse(i, *weight, rx);
             }
         }
+        Ok(())
     }
 
     // TODO: return un errore al posto del panic, OK(()) se tutto funziona 
-    pub fn connect_output(&mut self, mut output_monitor: OutputMonitor){
+    pub fn connect_output(&mut self, mut output_monitor: OutputMonitor) -> Result<(),Error>{
         // Connette l'ultimo layer con un output monitor, consuma l'ouput monitor e lo assegna alla rete. 
         
         // controllo che esista almeno un layer 
         if self.neural_layers.len() == 0{
-            panic!("add at least a layer before adding the output monitor");
+            //panic!("add at least a layer before adding the output monitor");
+            return Err(Error::NoLayerInNN);
         }
         // calcolo index ultimo layer
         let last_layer =  self.neural_layers.len() - 1 ;
@@ -222,12 +238,13 @@ impl NeuralNetwork {
         
         for neuron in self.neural_layers[last_layer].neurons.iter_mut(){
             // assegna ad ogni neurone l'estremità di sender e aggiunge all'output monitor i receiver
-            let (tx, rx) = sync_channel::<Spike>(0);    
+            let (tx, rx) = sync_channel::<i8>(0);    
             neuron.output.push(tx.clone());
             output_monitor.add_receiver(rx);
         }
 
         self.output_monitor = Some(output_monitor);
+        Ok(())
 
     }
 
@@ -237,17 +254,5 @@ impl NeuralNetwork {
             self.input_layer.as_ref().unwrap().to_string(),
             self.neural_layers.len()
         )
-    }
-
-
-}
-
-pub fn print(result: Vec<i32>,path: &str) {
-    for i in &result {
-        println!("{}", i);
-    }
-    let mut output_file = File::create(path).unwrap();
-    for o in result {
-        write!(output_file, "{}\n", o.to_string()).expect("Unable to write output length");
     }
 }

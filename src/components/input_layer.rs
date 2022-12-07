@@ -6,9 +6,8 @@ use std::fs::File;
 use std::io::Read;
 use std::sync::mpsc::SyncSender;
 use std::vec;
-
+use super::errors::Error;
 use super::input::Input;
-use super::spike::Spike;
 
 /*
 Conenitore di oggetti Input
@@ -19,16 +18,20 @@ pub struct InputLayer {
 }
 
 impl InputLayer {
-    fn check_inputs(&self) {
+    fn check_inputs(&self) -> std::result::Result<(),Error> {
         // TODO return a result instead of panicing create an Error for the empty layer and for the non connected layers
         if self.inputs.is_empty() {
-            panic!("Input layer is empty, please specify at least a file.");
+            //panic!("Input layer is empty, please specify at least a file.");
+            return Err(Error::EmptyInputLayer);
         }
         for input in &self.inputs {
             if input.is_empty_sender() {
-                panic!("Call the connect_inputs method of the neural network class before running the simulation.")
+                //panic!("Call the connect_inputs method of the neural network class before running the simulation.")
+                return Err(Error::InconnectedInput);
             }
         }
+
+        Ok(())
     }
 
     pub fn from_file(path: &str, delimiter: char) -> Result<Self, Box<dyn std::error::Error>>{
@@ -45,7 +48,8 @@ impl InputLayer {
         match file.read_to_string(&mut content) {
             Err(err) => return Err(Box::new(err)),
             Ok(_) => {
-                let inputs_str = content.split(delimiter);
+                let temp = content.replace("\r", "");
+                let inputs_str = temp.split(delimiter);
                 
                 for line in inputs_str{
                     let parse_r : Result<Vec<i8>, ParseIntError>= line.chars().map(|spike| spike.to_string().parse::<i8>()).collect();
@@ -82,27 +86,32 @@ impl InputLayer {
         Self { inputs }
     }
 
-    pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<Spike>) {
+    pub fn add_sender_to(&mut self, n_input: usize, tx: SyncSender<i8>) {
         // add a sender to the n_input-th input object 
         // TODO return a result<Ok<()>,Error> for out of bounds error  
         // println!("adding sender to input [{}]", &n_input);
         self.inputs[n_input].add_sender(tx);
     }
 
-    pub fn emit_spikes(self) -> Vec<JoinHandle<()>> {
+    pub fn emit_spikes(self) -> Result<Vec<JoinHandle<()>>, Error> {
         // vector of thread ids belonging to each spike generator
         let mut tids = vec![];
         // check the inputs status before proceding, modify for handling the result 
-        self.check_inputs();
-
-        for input in self.inputs {
-            // spawn a thread for each input file
-            let child = thread::spawn(move || {
-                input.run();
-            });
-            tids.push(child);
+        match self.check_inputs(){
+            Err(error) => Err(error),
+            Ok(_) =>{
+                for input in self.inputs {
+                    // spawn a thread for each input file
+                    let child = thread::spawn(move || {
+                        input.run();
+                    });
+                    tids.push(child);
+                }
+                return Ok(tids);
+            }
         }
-        return tids;
+
+        
     }
 
     pub fn to_string(&self) -> String {

@@ -1,8 +1,4 @@
-use super::{spike::Spike, neural_network::print};
-use std::{
-    sync::mpsc::{Receiver, RecvError},
-    thread::{self, JoinHandle},
-};
+use std::{sync::mpsc::{Receiver, RecvError}, thread::{JoinHandle, self}};
 
 /*
 Terminale che si può connettere a un layer per osservarne gli output.
@@ -10,70 +6,65 @@ Terminale che si può connettere a un layer per osservarne gli output.
 
 pub struct OutputMonitor {
     // connessioni in ingresso
-    receivers: Vec<Receiver<Spike>>,
+    receivers: Vec<Receiver<i8>>,
+    // output file
+    filename: String,
     // output proveniente dal layer precedente
-    // TODO sostituire i8 con la classe Spike da creare, in questo modo possiamo conoscere il
+    // TODO sostituire i8 con la classe Spike da creare, in questo modo possiamo conoscere il  
     // neurone di provenienza e ordinare gli output
-    outputs: Vec<i32>,
+    outputs: Vec<i8>,
     ts: i32,
 }
 
 impl OutputMonitor {
-    pub fn new(n_lastlayer: usize) -> Self {
+    pub fn new(filename: &str) -> Self {
         // costruttore
         Self {
             receivers: vec![],
-            outputs: vec![0; n_lastlayer],
-            ts: 0,
+            outputs: vec![],
+            filename: filename.to_string(),
+            ts: 0
         }
     }
 
-    pub fn add_receiver(&mut self, receiver: Receiver<Spike>) {
+    pub fn add_receiver(&mut self, receiver: Receiver<i8>) {
         // aggiunge un ricevitore in ingresso
         self.receivers.push(receiver);
     }
 
-    pub fn receive(&mut self) -> Result<Vec<Spike>, RecvError> {
+    pub fn receive(&self) -> Result<Vec<i8>, RecvError>{
         // riceve gli impulsi dal layer precedente, se va a buon fine restituisce il vettore di impulsi letti, altrimenti un RecvError
 
-        // vettore di impulsi in ingresso
+        // vettore di impulsi in ingresso 
         let mut outs = vec![];
 
-        // per ogni ricevitore
+        // per ogni ricevitore 
         for receiver in &self.receivers {
-            // riceve gli impulsi
+            // riceve gli impulsi 
             let out = receiver.recv();
             match out {
-                Ok(spike) => {
-                    let n_neuron;
-                    match spike.n_neuron {
-                        Some(index) => n_neuron = index as usize,
-                        None => panic!("Cannot connect input layer with output monitor"),
-                    };
-                    self.outputs[n_neuron] += spike.output as i32;
-                }
-                Err(e) => return Err(e),
+                Ok(msg) => outs.push(msg),
+                Err(e) => return Err(e)
             }
         }
 
         Ok(outs)
     }
 
-    pub fn run(mut self) -> JoinHandle<(Vec<i32>)> {
+    pub fn run(mut self) -> JoinHandle<()> {
         // lancia un thread e restituisce un Join Handle, cambiare il return in Result e sostituire il break con un return di RecvError
         thread::spawn(move || {
             loop {
                 let res = self.receive();
                 match res {
                     Ok(outs) => {
-                        //   println!("\t Output Monitor: {} at [{}]", outs.into_iter().sum::<i8>(), self.ts);
-                        println!("{}",self.ts);
-                        self.ts += 1;
-                    }
-                    Err(e) => break
+                        println!("\t Output Monitor: {} at [{}]", outs.into_iter().sum::<i8>(), self.ts);
+                        self.ts+=1;
+                    },
+                    Err(_) => break,
                 }
             }
-            self.outputs
         })
+    
     }
 }

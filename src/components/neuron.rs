@@ -2,7 +2,9 @@ use std::sync::{Arc, Barrier};
 
 use std::sync::mpsc::{RecvError, SyncSender};
 
-use super::{synapse::Synapse, spike::Spike};
+use super::synapse::Synapse;
+
+use super::errors::Error;
 /*
 Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i SyncSender
 con capacità 0 (canali rendez-vous) in modo da non utilizzare altre memory barrier per sincronizzare input e output con il primo
@@ -25,11 +27,11 @@ pub struct Neuron {
     // channels' ends with associated weight 
     pub synapses: Vec<Synapse>,
     // neuron output
-    pub output: Vec<SyncSender<Spike>>,
+    pub output: Vec<SyncSender<i8>>,
 
     tao: f64,
     // formato: l#n#, dove il primo # indica il numero del layer, mentre il secondo indica il numero del neurone all'interno del layer
-    name: i32,
+    name: String,
 }
 
 impl Neuron {
@@ -40,7 +42,7 @@ impl Neuron {
         v_reset: f64,
         tao: f64,
         model: fn(i32, i32, f64, f64, f64, Vec<f64>) -> f64,
-        name: i32,
+        name: String,
     ) -> Self {
         Self {
             v_threshold,
@@ -88,7 +90,7 @@ impl Neuron {
         return Ok(weighted_inputs);
     }
 
-    pub fn emit_spikes(&self, spike : Spike){
+    pub fn emit_spikes(&self, spike : i8) ->Result<(), Error> {
         // invia 0 o 1 ai neuroni successivi
 
         // per ogni connessione in uscita 
@@ -98,11 +100,13 @@ impl Neuron {
             // TODO vedere se c'è un modo di gestire solo il ramo Err, l'Ok non dovrebbe fare nulla  
             match r {
                 Ok(_) => {},
-                Err(e) => panic!("{}", e)
+                Err(_e) => return Err(Error::SendError)
             }
         }
+
+        Ok(())
     }
-    pub fn run(&mut self, barrier: Arc<Barrier>) {
+    pub fn run(&mut self, barrier: Arc<Barrier>) ->Result<(), Error> {
         // riceve uno smart pointer a barrier per sincronizzarsi con gli altri neuroni
 
         // receiving: true se il layer precedente invia Result Ok, false altrimenti (fine della trasimissione, canale chiuso)
@@ -143,7 +147,7 @@ impl Neuron {
                 );
                 self.ts_1 = self.ts;
                 self.v_mem_old = out;
-                // println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
+                println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
                 if out > self.v_threshold {
                     // se il modello fornisce un valore maggiore della soglia, resetta la tensione di membrana e assegna 1 all'out_spike
                     // e aggiorna ts_1 a ts
@@ -155,13 +159,17 @@ impl Neuron {
             }
             // invia la spike a tutti i neuroni di output o al monitor
             // TODO: sarebbe meglio dare un return come Result 
-            self.emit_spikes(Spike::new(out_spike, Some(self.name)));
+            match self.emit_spikes(out_spike){
+                Err(error) => return Err(error),
+                Ok(_)=>{}
+            }
             
             
             // attendi che gli altri thread facciano output prima di leggere gli input 
             barrier.wait();
             
         }
+        Ok(())
     }
 
     pub fn to_string(&self) -> String {

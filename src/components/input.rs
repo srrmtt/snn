@@ -2,14 +2,14 @@ use std::{fs::File, io::BufReader, io::Read, vec};
 
 use std::sync::mpsc::SyncSender;
 
-use super::spike::Spike;
+use super::errors::Error;
 
 /*
 The input class contiains the logic to emit single spike to the first neural layer.
 */
 pub struct Input {
     spikes: Vec<i8>,
-    senders: Vec<SyncSender<Spike>>,
+    senders: Vec<SyncSender<i8>>,
     // used just for debugging 
     ts: i32,
 }
@@ -40,35 +40,46 @@ impl Input {
 
         Ok(Input::new(ret))
     }
-    pub fn emit(&self, spike: Spike) {
+    pub fn emit(&self, spike: i8) ->Result<(), Error>{
         // emette una spike sul SynchSender
         // TODO return a Result instead of panicking
         
         //println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
+        if spike == 1 {
+            println!("emitting 1 at [{}]", self.ts);
+        }
         for input in &self.senders {
             // TODO handle SendError
             let r = input.send(spike);
             match r {
                 Ok(()) => continue,
-                Err(e) => panic!("Error {}", e),
+                Err(_) => return Err(Error::SendError),
             }
         }
+
+        Ok(())
     }
-    pub fn run(mut self) {
+    pub fn run(mut self) -> Result<(), Error>{
         // logic of the whole input emit spike until the input vector is empty
         for spike in &self.spikes {
             
             // handle the return result
-            self.emit(Spike::new(*spike, None));
-            // just for debug
-            self.ts += 1;
+            match self.emit(*spike){
+                Err(error) => return Err(error),
+                Ok(_) => {
+                    //just for debug
+                    self.ts += 1;
+                }
+            }
+            
         }
+        Ok(())
     }
     pub fn is_empty_sender(&self) -> bool {
         return self.senders.is_empty();
     }
 
-    pub fn add_sender(&mut self, tx: SyncSender<Spike>) {
+    pub fn add_sender(&mut self, tx: SyncSender<i8>) {
         self.senders.push(tx);
     }
 }

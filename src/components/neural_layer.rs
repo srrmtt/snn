@@ -7,7 +7,7 @@ use std::sync::mpsc::{Receiver, SyncSender};
 
 use crate::components::neuron::Neuron;
 
-use super::{synapse::Synapse, spike::Spike};
+use super::synapse::Synapse;
 /*
 Struttura contenitore di Neuroni
 */
@@ -49,14 +49,14 @@ impl NeuralLayer {
         return tids;
     }
 
-    pub fn add_synapse(&mut self, neuron: usize, weight: f64, channel: Receiver<Spike>) {
+    pub fn add_synapse(&mut self, neuron: usize, weight: f64, channel: Receiver<i8>) {
         // aggiunge una sinapsi ricevendo peso e receiver a un neurone, return di result se neuron è out of bounds
         let s = Synapse::new(weight, channel);
         // println!("adding synapses to neuron [{}]", &neuron);
         self.neurons[neuron].synapses.push(s);
     }
 
-    pub fn add_sender(&mut self, neuron: usize, channel: SyncSender<Spike>) {
+    pub fn add_sender(&mut self, neuron: usize, channel: SyncSender<i8>) {
         // aggiunge un sender al neuron-esimo neurone, restituire un error se è out of bounds 
         self.neurons[neuron].output.push(channel);
     }
