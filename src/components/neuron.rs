@@ -1,13 +1,12 @@
-use std::sync::{Arc, Barrier};
+use std::sync::{Arc,};
 
-use std::sync::mpsc::{RecvError, SyncSender};
-
-use super::{synapse::Synapse, spike::Spike};
+use super::{spike::Spike};
 /*
-Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i SyncSender
+Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i Sender
 con capacità 0 (canali rendez-vous) in modo da non utilizzare altre memory barrier per sincronizzare input e output con il primo
 e ultimo layer.
 */
+#[derive(Clone)]
 pub struct Neuron {
     // neural network parameters
     v_threshold: f64,
@@ -22,14 +21,11 @@ pub struct Neuron {
     // ts NON è il tempo globale, non è necessario avere un contatore globale perchè la rete ha bisogno solo di differenze temporali (1 - 0) == (12 - 11)
     // ts è un contatore locale al neurone (un'unità indietro rispetto al layer precedente se si considera un tempo t della simulazione)
     ts: i32,
-    // channels' ends with associated weight 
-    pub synapses: Vec<Synapse>,
-    // neuron output
-    pub output: Vec<SyncSender<Spike>>,
+    
 
     tao: f64,
     // formato: l#n#, dove il primo # indica il numero del layer, mentre il secondo indica il numero del neurone all'interno del layer
-    name: i32,
+    pub position: i32,
 }
 
 impl Neuron {
@@ -40,7 +36,7 @@ impl Neuron {
         v_reset: f64,
         tao: f64,
         model: fn(i32, i32, f64, f64, f64, Vec<f64>) -> f64,
-        name: i32,
+        position: i32,
     ) -> Self {
         Self {
             v_threshold,
@@ -52,119 +48,51 @@ impl Neuron {
             ts: 0,
             tao,
             model: Arc::new(model),
-            synapses: vec![],
-            output: vec![],
-            name,
+            position,
         }
     }
-    fn read_spikes(&self) -> Result<Vec<f64>, RecvError> {
-        // legge gli impulsi provenienti dal layer precedente (sia neurale che di input)
-
-        // vettore che contiene (w_i * s_i) dove s_i è 0 o 1 e w_i è il peso della connessione
-        let mut weighted_inputs = vec![];
+    /*
+    
+    
+    */
+    pub fn run(&mut self, weighted_inputs: Vec<f64>) -> Spike {        
+        // spike received: true se esiste un valore != 0
         
-        // per ogni connessione in ingresso 
-        for syanpse in &self.synapses {
-             
-            // a ts = 0 (inizio della simulazione) nessun neurone scatta e quindi non deve aspettare sulle sinapsi inibitorie
-            if syanpse.get_weight() < 0.0 && self.ts == 0 {
-                continue;
-            }
-
-            // riceve gli input nella forma di Result<RecvError, Ok(s_i * w_i)
-            match syanpse.receive() {
-                // wi: weighted input
-                Ok(wi) => {
-                    // considera solo gli input != 0
-                    if wi != 0.0 {
-                        weighted_inputs.push(wi)
-                    }
-                    
-                }
-                Err(e) => return Err(e),
-            }
+        let spike_received = !weighted_inputs.is_empty();
+        let mut out_spike = 0;
+        // 0100001000
+        // ts = 0
+        // ts_1 = 0
+        self.ts += 1;
+        if spike_received {
+            // se esiste una spike diversa da 0, il neurone comincia l'elaborazione
+            
+            let out = (*self.model)(
+                self.ts,
+                self.ts_1,
+                self.v_rest,
+                self.v_mem_old,
+                self.tao,
+                // è possibile fare unwrap() perchè altrimenti l'if sarebbe false
+                weighted_inputs,
+            );
+            self.ts_1 = self.ts;
+            self.v_mem_old = out;
+            // println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
+            if out > self.v_threshold {
+                // se il modello fornisce un valore maggiore della soglia, resetta la tensione di membrana e assegna 1 all'out_spike
+                // e aggiorna ts_1 a ts
+                out_spike = 1;
+                self.v_mem_old = self.v_reset;
+            } 
+            //println!("{} out at {} : {}", self.to_string(), &self.ts, out_spike);   
         }
-        // println!("[Neuron {}] --- {:?} read at [{}]",&self.name, weighted_inputs, self.ts);
-        return Ok(weighted_inputs);
-    }
-
-    pub fn emit_spikes(&self, spike : Spike){
-        // invia 0 o 1 ai neuroni successivi
-
-        // per ogni connessione in uscita 
-        for out in &self.output{
-            // invia la spike
-            let r = out.send(spike);
-            // TODO vedere se c'è un modo di gestire solo il ramo Err, l'Ok non dovrebbe fare nulla  
-            match r {
-                Ok(_) => {},
-                Err(e) => panic!("{}", e)
-            }
-        }
-    }
-    pub fn run(&mut self, barrier: Arc<Barrier>) {
-        // riceve uno smart pointer a barrier per sincronizzarsi con gli altri neuroni
-
-        // receiving: true se il layer precedente invia Result Ok, false altrimenti (fine della trasimissione, canale chiuso)
-        let mut receiving = true;
+        Spike::new(out_spike, Some(self.position))
+            
         
-        while receiving {
-            // spike received: true se esiste un valore != 0
-            let spike_received;
-            // vettore di ingressi pesati provenienti dai neuroni di ingresso 
-            let res_weighted_inputs = self.read_spikes();
-
-            match &res_weighted_inputs {
-                Err(_) => {
-                    // fine della connessione, estremità in ingresso chiusa 
-                    println!("ended input at [{}]", self.ts);
-                    receiving=false;
-                    spike_received = false;
-                }
-                // true se esiste un input != 0 
-                Ok(weighted_inputs) => spike_received = !weighted_inputs.is_empty(),
-            };
-            let mut out_spike = 0;
-            // 0100001000
-            // ts = 0
-            // ts_1 = 0
-            self.ts += 1;
-            if spike_received {
-                // se esiste una spike diversa da 0, il neurone comincia l'elaborazione
-                
-                let out = (*self.model)(
-                    self.ts,
-                    self.ts_1,
-                    self.v_rest,
-                    self.v_mem_old,
-                    self.tao,
-                    // è possibile fare unwrap() perchè altrimenti l'if sarebbe false
-                    res_weighted_inputs.unwrap(),
-                );
-                self.ts_1 = self.ts;
-                self.v_mem_old = out;
-                // println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
-                if out > self.v_threshold {
-                    // se il modello fornisce un valore maggiore della soglia, resetta la tensione di membrana e assegna 1 all'out_spike
-                    // e aggiorna ts_1 a ts
-                    out_spike = 1;
-                    self.v_mem_old = self.v_reset;
-                } 
-                
-                //println!("{} out at {} : {}", self.to_string(), &self.ts, out_spike);   
-            }
-            // invia la spike a tutti i neuroni di output o al monitor
-            // TODO: sarebbe meglio dare un return come Result 
-            self.emit_spikes(Spike::new(out_spike, Some(self.name)));
-            
-            
-            // attendi che gli altri thread facciano output prima di leggere gli input 
-            barrier.wait();
-            
-        }
     }
 
-    pub fn to_string(&self) -> String {
-        return format!("[Neuron: {}]", self.name.clone());
-    }
+    // pub fn to_string(&self) -> String {
+        // return format!("[Neuron: {}]", self.position.clone());
+    // }
 }
