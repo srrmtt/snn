@@ -126,4 +126,8 @@ impl NeuralLayer {
     pub fn set_receiver(&mut self, receiver: Receiver<Vec<Spike>>){
         self.receiver = Some(receiver)
     }
+
+    pub fn to_string(&self) -> String{
+        format!("with [{}] neurons.", self.neurons.len())
+    }
 }

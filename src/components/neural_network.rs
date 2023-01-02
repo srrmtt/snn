@@ -224,9 +224,10 @@ impl NeuralNetwork {
 
     pub fn to_string(&self) -> String {
         format!(
-            "Neural Network with:\n\t- {}\n\t- [{}] neural layers",
+            "Neural Network with:\n\t- {}\n\t- [{}] neural layers\n\t\t{}",
             self.input_layer.as_ref().unwrap().to_string(),
-            self.neural_layers.len()
+            self.neural_layers.len(),
+            self.neural_layers[0].to_string()
         )
     }
 }

@@ -10,7 +10,7 @@ fn main() {
     let nn=NeuralNetwork::from_json("./test.json");
     //let nn=NeuralNetwork::from_JSON("./data/simple_test.json");
     println!("{}", nn.to_string());
-    println!("\t\tDONE.");
+    println!("\t---------- DONE -----------");
     println!("--- Starting simulation...");
     let now = Instant::now();
     nn.run("output_file.txt");
