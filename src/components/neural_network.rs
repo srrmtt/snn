@@ -1,21 +1,10 @@
 use std::{vec, sync::mpsc::channel};
-use libm::exp;
+
 use std::fs::File;
 use serde::Deserialize;
 use std::io::Write;
 
 use super::{input_layer::InputLayer, neural_layer::NeuralLayer, neuron::Neuron, output::OutputMonitor, spike::Spike, errors::SNNError};
-
-fn lif(ts: i32, ts_1: i32, v_rest: f64, v_mem_old: f64, tao: f64, weights: Vec<f64>) -> f64 {
-    let k = -((ts - ts_1) as f64 / tao);
-
-    let exponential = exp(k);
-
-    let v_mem = v_rest + (v_mem_old - v_rest) * exponential;
-
-    let weight = weights.iter().sum::<f64>();
-    return v_mem + weight;
-}
 
 #[derive(Debug, Deserialize)]
 struct Value {
@@ -77,13 +66,13 @@ impl NeuralNetwork {
     }
 
 
-    pub fn from_json(path: &str)-> Result<NeuralNetwork, SNNError>{
+    pub fn from_json(path: &str, model: fn(i32, i32, f64, f64, f64, Vec<f64>) -> f64)-> Result<NeuralNetwork, SNNError>{
         let file = File::open(path).unwrap();
         let parameters: Value = serde_json::from_reader(file).expect("JSON was not well-formatted");
         
         let last_layer_len = parameters.thresholds.last().unwrap().len();
         
-        let mut nn = NeuralNetwork::new(parameters.rest_potential, parameters.reset_potential, parameters.tau, lif, parameters.thresholds);        
+        let mut nn = NeuralNetwork::new(parameters.rest_potential, parameters.reset_potential, parameters.tau, model, parameters.thresholds);        
         
         for i in 0..nn.neural_layers.len() {
             match nn.connect(i,i,parameters.intra_layer_weights[i].clone()){
