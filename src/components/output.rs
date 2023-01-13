@@ -1,8 +1,10 @@
-use super::{spike::Spike, neural_network::print};
+use super::spike::Spike;
 use std::{
-    sync::mpsc::{Receiver, RecvError},
+    sync::mpsc::{Receiver},
     thread::{self, JoinHandle},
 };
+
+use super::errors::SNNError;
 
 /*
 Terminale che si può connettere a un layer per osservarne gli output.
@@ -11,10 +13,10 @@ Terminale che si può connettere a un layer per osservarne gli output.
 pub struct OutputMonitor {
     // connessioni in ingresso
     receivers: Vec<Receiver<Spike>>,
-    // output proveniente dal layer precedente
-    // TODO sostituire i8 con la classe Spike da creare, in questo modo possiamo conoscere il
-    // neurone di provenienza e ordinare gli output
+    // outputs è il vettore che colleziona il numero di spike a 1 per ogni neurone dell'ultimo layer 
+    // corrispondenti a spike.n_neuron. 
     outputs: Vec<i32>,
+    // tempo locale al monitor
     ts: i32,
 }
 
@@ -33,11 +35,8 @@ impl OutputMonitor {
         self.receivers.push(receiver);
     }
 
-    pub fn receive(&mut self) -> Result<Vec<Spike>, RecvError> {
+    pub fn receive(&mut self) -> Result<() , SNNError> {
         // riceve gli impulsi dal layer precedente, se va a buon fine restituisce il vettore di impulsi letti, altrimenti un RecvError
-
-        // vettore di impulsi in ingresso
-        let mut outs = vec![];
 
         // per ogni ricevitore
         for receiver in &self.receivers {
@@ -48,29 +47,32 @@ impl OutputMonitor {
                     let n_neuron;
                     match spike.n_neuron {
                         Some(index) => n_neuron = index as usize,
-                        None => panic!("Cannot connect input layer with output monitor"),
+                        None => {
+                            return Err(SNNError::InconnectedOutput("Connect the last layer with the output layer before calling run".to_string()));
+                        }
                     };
+                    // aggiorna il vettore in posizione n_neuron con la spike ricevuta (+0 o +1)
                     self.outputs[n_neuron] += spike.output as i32;
                 }
-                Err(e) => return Err(e),
+                Err(_) => return Err(SNNError::EmptyChannelError("Comunication ended".to_string())),
             }
         }
 
-        Ok(outs)
+        Ok(())
     }
 
-    pub fn run(mut self) -> JoinHandle<(Vec<i32>)> {
+    pub fn run(mut self) -> JoinHandle<Vec<i32>> {
         // lancia un thread e restituisce un Join Handle, cambiare il return in Result e sostituire il break con un return di RecvError
         thread::spawn(move || {
             loop {
                 let res = self.receive();
                 match res {
-                    Ok(outs) => {
-                        //   println!("\t Output Monitor: {} at [{}]", outs.into_iter().sum::<i8>(), self.ts);
-                        println!("{}",self.ts);
+                    Ok(_) => {
                         self.ts += 1;
                     }
-                    Err(e) => break
+                    Err(_) => {
+                        break;
+                    }
                 }
             }
             self.outputs

@@ -1,14 +1,21 @@
 mod components;
 
-
 use components::neural_network::NeuralNetwork;
 
 fn main() {
     println!("-------------------- START -------------------");
     println!("--- Creating neural network from test.json...");
-    let mut nn=NeuralNetwork::from_JSON("test.json");
-    println!("\t\tDONE.");
-    println!("--- Starting simulation...");
-    nn.run("output_file.txt"); 
-    println!("\t\tDONE.")
+    let nn_res=NeuralNetwork::from_json("./test.json");
+    match nn_res{
+        Ok(nn) => {
+            println!("{}", nn.to_string());
+            println!("\t\tDONE.");
+            println!("--- Starting simulation...");
+            nn.run("output_file.txt");
+            println!("\t\tDONE.")
+        },
+        Err(e) => panic!("{:?}", e)
+    }
+    
+
 }

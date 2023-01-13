@@ -1,17 +1,19 @@
-use std::{fs::File, io::BufReader, io::Read, vec};
+use std::sync::{Arc, Barrier};
+use std::vec;
 
-use std::sync::mpsc::SyncSender;
+use std::sync::mpsc::Sender;
 
+use super::errors::SNNError;
 use super::spike::Spike;
 
 /*
 The input class contiains the logic to emit single spike to the first neural layer.
 */
 pub struct Input {
+    // vettore di spike che invia: a ogni posizione corrisponde un ts e la cella corrisponde alla spike da inviare   
     spikes: Vec<i8>,
-    senders: Vec<SyncSender<Spike>>,
-    // used just for debugging 
-    ts: i32,
+    // vettori di sender collegati a ogni neurone del primo layer
+    senders: Vec<Sender<Spike>>,
 }
 
 impl Input {
@@ -20,55 +22,37 @@ impl Input {
         Self {
             spikes,
             senders: vec![],
-            ts: 0,
         }
     }
 
-    pub fn from_file(filename: &str) -> Result<Self, std::io::Error> {
-        // builder method: da un file costruisce un oggetto Input
-        let file = File::open(filename)?;
-        let mut buf_reader = BufReader::new(file);
-        let mut content = String::new();
-
-        buf_reader.read_to_string(&mut content)?;
-        // TODO: check di input format and the logic correctness of the input
-        let ret = content
-            .bytes()
-            .into_iter()
-            .map(|c| (c - '0' as u8) as i8)
-            .collect();
-
-        Ok(Input::new(ret))
-    }
-    pub fn emit(&self, spike: Spike) {
-        // emette una spike sul SynchSender
-        // TODO return a Result instead of panicking
-        
-        //println!("[Input] ---sending: {} at ts: [{}]", spike, self.ts);
+    fn emit(&self, spike: Spike) -> Result<(), SNNError>{
+        // emette una spike sul Sender, invia una spike ai neuroni collegati
         for input in &self.senders {
             // TODO handle SendError
             let r = input.send(spike);
             match r {
                 Ok(()) => continue,
-                Err(e) => panic!("Error {}", e),
+                Err(_) => return Err(SNNError::InconnectedInput("[Input] Connect this input with a neuron before calling the emit method.".to_string())),
             }
         }
+        Ok(())
     }
-    pub fn run(mut self) {
+    pub fn run(self, barrier: Arc<Barrier>) {
         // logic of the whole input emit spike until the input vector is empty
         for spike in &self.spikes {
-            
             // handle the return result
-            self.emit(Spike::new(*spike, None));
-            // just for debug
-            self.ts += 1;
+            match self.emit(Spike::new(*spike, None)){
+                Ok(_) => {},
+                Err(e) => panic!("{:?}", e)
+            }
+            barrier.wait();
         }
     }
     pub fn is_empty_sender(&self) -> bool {
         return self.senders.is_empty();
     }
 
-    pub fn add_sender(&mut self, tx: SyncSender<Spike>) {
+    pub fn add_sender(&mut self, tx: Sender<Spike>) {
         self.senders.push(tx);
     }
 }

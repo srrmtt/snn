@@ -3,11 +3,11 @@ use std::{
     thread::{self, JoinHandle},
 };
 
-use std::sync::mpsc::{Receiver, SyncSender};
+use std::sync::mpsc::{Receiver, Sender};
 
 use crate::components::neuron::Neuron;
 
-use super::{synapse::Synapse, spike::Spike};
+use super::{synapse::Synapse, spike::Spike, errors::SNNError};
 /*
 Struttura contenitore di Neuroni
 */
@@ -33,7 +33,6 @@ impl NeuralLayer {
 
     pub fn run_neurons(self) -> Vec<JoinHandle<()>> {
         // lancia n_neurons thread attraverso il metodo run() dei singoli neuroni
-
         // TODO: gestire gli errori
         let mut tids = vec![];
         for mut neuron in self.neurons {
@@ -41,7 +40,10 @@ impl NeuralLayer {
             let barrier = Arc::clone(&self.barrier);
 
             let tid = thread::spawn(move || {
-                neuron.run(barrier);
+                let res = neuron.run(barrier);
+                if res.is_err(){
+                    panic!("[Neural Layer]: {:?}", res)
+                }
             });
             tids.push(tid);
         }
@@ -49,14 +51,18 @@ impl NeuralLayer {
         return tids;
     }
 
-    pub fn add_synapse(&mut self, neuron: usize, weight: f64, channel: Receiver<Spike>) {
+    pub fn add_synapse(&mut self, neuron: usize, weight: f64, channel: Receiver<Spike>)  -> Result<(), SNNError>{
         // aggiunge una sinapsi ricevendo peso e receiver a un neurone, return di result se neuron è out of bounds
         let s = Synapse::new(weight, channel);
-        // println!("adding synapses to neuron [{}]", &neuron);
+        let len = self.neurons.len();
+        if neuron >= self.neurons.len(){
+            return Err(SNNError::OutOfIndexError(format!("Trying to add synapses to neuron [{neuron}] but there are only {len} in the layer")));
+        }
         self.neurons[neuron].synapses.push(s);
+        Ok(())
     }
 
-    pub fn add_sender(&mut self, neuron: usize, channel: SyncSender<Spike>) {
+    pub fn add_sender(&mut self, neuron: usize, channel: Sender<Spike>) {
         // aggiunge un sender al neuron-esimo neurone, restituire un error se è out of bounds 
         self.neurons[neuron].output.push(channel);
     }

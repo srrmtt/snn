@@ -1,10 +1,11 @@
 use std::sync::{Arc, Barrier};
 
-use std::sync::mpsc::{RecvError, SyncSender};
+use std::sync::mpsc::Sender;
 
+use super::errors::SNNError;
 use super::{synapse::Synapse, spike::Spike};
 /*
-Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i SyncSender
+Classe che contiene l'intelligenza della rete, attraverso i channel i vari neuroni comunicano fra di loro, si utilizzano i Sender
 con capacità 0 (canali rendez-vous) in modo da non utilizzare altre memory barrier per sincronizzare input e output con il primo
 e ultimo layer.
 */
@@ -25,7 +26,7 @@ pub struct Neuron {
     // channels' ends with associated weight 
     pub synapses: Vec<Synapse>,
     // neuron output
-    pub output: Vec<SyncSender<Spike>>,
+    pub output: Vec<Sender<Spike>>,
 
     tao: f64,
     // formato: l#n#, dove il primo # indica il numero del layer, mentre il secondo indica il numero del neurone all'interno del layer
@@ -57,7 +58,8 @@ impl Neuron {
             name,
         }
     }
-    fn read_spikes(&self) -> Result<Vec<f64>, RecvError> {
+
+    fn read_spikes(&self) -> Result<Vec<f64>, SNNError> {
         // legge gli impulsi provenienti dal layer precedente (sia neurale che di input)
 
         // vettore che contiene (w_i * s_i) dove s_i è 0 o 1 e w_i è il peso della connessione
@@ -81,14 +83,14 @@ impl Neuron {
                     }
                     
                 }
+                // Comunicazione terminata, canale vuoto o chiuso dall'estremità del sender
                 Err(e) => return Err(e),
             }
         }
-        // println!("[Neuron {}] --- {:?} read at [{}]",&self.name, weighted_inputs, self.ts);
         return Ok(weighted_inputs);
     }
 
-    pub fn emit_spikes(&self, spike : Spike){
+    pub fn emit_spikes(&self, spike : Spike) -> Result<(), SNNError>{
         // invia 0 o 1 ai neuroni successivi
 
         // per ogni connessione in uscita 
@@ -98,11 +100,12 @@ impl Neuron {
             // TODO vedere se c'è un modo di gestire solo il ramo Err, l'Ok non dovrebbe fare nulla  
             match r {
                 Ok(_) => {},
-                Err(e) => panic!("{}", e)
+                Err(_) => return Err(SNNError::EmptyChannelError("Receiver closed the channel before the sender.".to_string()))
             }
         }
+        Ok(())
     }
-    pub fn run(&mut self, barrier: Arc<Barrier>) {
+    pub fn run(&mut self, barrier: Arc<Barrier>) -> Result<(), SNNError>{
         // riceve uno smart pointer a barrier per sincronizzarsi con gli altri neuroni
 
         // receiving: true se il layer precedente invia Result Ok, false altrimenti (fine della trasimissione, canale chiuso)
@@ -117,7 +120,6 @@ impl Neuron {
             match &res_weighted_inputs {
                 Err(_) => {
                     // fine della connessione, estremità in ingresso chiusa 
-                    println!("ended input at [{}]", self.ts);
                     receiving=false;
                     spike_received = false;
                 }
@@ -131,7 +133,8 @@ impl Neuron {
             self.ts += 1;
             if spike_received {
                 // se esiste una spike diversa da 0, il neurone comincia l'elaborazione
-                
+                let pos_input = res_weighted_inputs.as_ref().unwrap().iter().any(|x| *x > 0.0);
+
                 let out = (*self.model)(
                     self.ts,
                     self.ts_1,
@@ -141,7 +144,10 @@ impl Neuron {
                     // è possibile fare unwrap() perchè altrimenti l'if sarebbe false
                     res_weighted_inputs.unwrap(),
                 );
-                self.ts_1 = self.ts;
+                
+                if pos_input{
+                    self.ts_1 = self.ts;
+                }
                 self.v_mem_old = out;
                 // println!("neuron [{}] emits {} at time [{}] --- threshold: {}" , self.name, out, self.ts, self.v_threshold);
                 if out > self.v_threshold {
@@ -151,20 +157,22 @@ impl Neuron {
                     self.v_mem_old = self.v_reset;
                 } 
                 
-                //println!("{} out at {} : {}", self.to_string(), &self.ts, out_spike);   
             }
             // invia la spike a tutti i neuroni di output o al monitor
             // TODO: sarebbe meglio dare un return come Result 
-            self.emit_spikes(Spike::new(out_spike, Some(self.name)));
+            let res = self.emit_spikes(Spike::new(out_spike, Some(self.name)));
             
             
             // attendi che gli altri thread facciano output prima di leggere gli input 
             barrier.wait();
+            if res.is_err() {
+                // errore critico, ferma la simulazione (receiver terminato prima del sender)
+                return res;
+            }
             
         }
+        Ok(())
     }
 
-    pub fn to_string(&self) -> String {
-        return format!("[Neuron: {}]", self.name.clone());
-    }
+    
 }

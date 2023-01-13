@@ -1,6 +1,6 @@
-#[derive(Clone,Copy)]
+#[derive(Clone,Copy, Debug)]
 pub struct Spike{
-     pub output: i8,
+    pub output: i8,
     pub n_neuron: Option<i32>
 }
 
@@ -9,7 +9,5 @@ impl Spike{
         Self {
             output, n_neuron
         }
-
-    
     }
 }

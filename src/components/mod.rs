@@ -6,3 +6,4 @@ pub mod neuron;
 pub mod output;
 pub mod synapse;
 pub mod spike;
+pub mod errors;
